@@ -2,15 +2,8 @@ import pygame, sys
 from pygame.locals import *
 import time
 
-display_width = 1366
-display_height = 768
-
-pygame.init()
-gameDisplay = pygame.display.set_mode((1366,768), pygame.FULLSCREEN)
-pygame.display.toggle_fullscreen
-pygame.display.set_caption('Kimi no Mama')
-gameIcon = pygame.image.load('images/images.png')
-pygame.display.set_icon(gameIcon)
+display_width = 800
+display_height = 600
 
 #colors in a tuple
 black = (0, 0, 0)
@@ -20,12 +13,19 @@ red = (255, 0, 0)
 green = (0, 200, 0)
 blue = (0, 0, 255)
 
+pygame.init()
+gameDisplay = pygame.display.set_mode((display_width,display_height))
+pygame.display.toggle_fullscreen
+pygame.display.set_caption('Kimi no Mama')
+gameIcon = pygame.image.load('assets/icon.png')
+pygame.display.set_icon(gameIcon)
+
 #something for fps, will be called later on
 clock = pygame.time.Clock()
 
 class renderImage:
 
-    def __init__(self, filename, pos_x = 0, pos_y = 0, path = 'images/', extension = '.png'):
+    def __init__(self, filename, pos_x = 0, pos_y = 0, path = 'assets/', extension = '.png'):
         global display_width
         global display_height
         self.display_width = display_width
@@ -102,7 +102,7 @@ def display_text_active(text_list, size, color, pos_x, pos_y):
 def start():
 
     gameDisplay.fill(white)
-    renderImage('placeholder_bg1', 0, 0).center()
+    renderImage('bg/cafeteria', 0, 0).center()
     game_done = False
 
     while not game_done:
@@ -111,7 +111,7 @@ def start():
                 pygame.quit()
                 quit()
 
-        renderImage('mom', 150,30).center()
+        renderImage('char/mom-solo', 150,30).center()
 
         button(100, 450, 'button1', screen1)
         button(500, 450, 'button2', screen2)
