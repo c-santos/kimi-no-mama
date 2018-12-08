@@ -26,3 +26,7 @@ print (some_variablex)
 print (some_variables)
 
 dictionary = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple'}
+
+a = dictionary.get('Scene4')
+print (a)
+
