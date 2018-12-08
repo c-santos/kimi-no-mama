@@ -15,7 +15,8 @@ pygame.display.set_icon(gameIcon)
 #a dictionary of scenes and their background
 scenery = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple'}
 character = {'Scene1': 'mom', 'Scene2': 'mom', 'Scene3': 'mom', 'Scene4': 'mom', 'Scene5': 'mom', 'Scene6': 'mom'}
-dialogue = {'Scene1': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene2': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene3': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene4': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene5': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene6': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away']}
+dialogue = {'Scene1': ['you and me in the moonlight', 'byeol kkot chukje yeollin bam', 'pado sorireul teulgo', 'chumeul chuneon ni sungan', 'i neukkim jeongmal ttagya'], 'Scene2': ['badaya uriwa gachi nora', 'barama neodo ijjogeuro wa'], 'Scene3': ['dalppit jomyeong araeseo', 'neowa nawa sesanggwa', 'da gachi Party all night long', 'Yeah, it’s good'], 'Scene4': ['If you wanna have some fun', 'jjapjjalhan gonggicheoreom', 'i sungane teukbyeolhan', 'haengbogeul notchiji ma'], 'Scene5': ['One, two, three, let\'s go', 'chouju wiro', 'narageul deut chumchureoga hey', 'oh let\'s dance the night away'], 'Scene6': ['Let’s dance the night away', 'One, two, three, let’s go', 'jeo bada geonneo', 'deullil deut sori jilleo', 'Let’s dance the night away']}
+nexts = {'Scene1': 'Scene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Scene1'}
 
 #colors in a tuple
 black = (0, 0, 0)
@@ -27,7 +28,7 @@ blue = (0, 0, 255)
 
 clock = pygame.time.Clock()
 
-def button(pos_x, pos_y, image, action = None, button_width = 48, button_height = 48):
+def button(pos_x, pos_y, image, action = None, button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, action = None, button_width = 48, button_height = 48
 
 	mouse_position = pygame.mouse.get_pos()
 	left_click, scroll, right_click = pygame.mouse.get_pressed()
@@ -42,7 +43,13 @@ def button(pos_x, pos_y, image, action = None, button_width = 48, button_height 
 	else:
 		renderImage(image, pos_x, pos_y).coordinates()
 
-class renderImage:
+def string_to_callable(string):
+
+	callables = {'passiveScene':passiveScene}
+	callable_name = callables.get(string)
+	return callable_name
+
+class renderImage: #parameters: self, filename, pos_x = 0, pos_y = 0, path = 'images/', extension = '.png'
 
 	def __init__(self, filename, pos_x = 0, pos_y = 0, path = 'images/', extension = '.png'):
 		global display_width
@@ -68,9 +75,9 @@ class renderImage:
 
 	def coordinates(self):
 		self.imageRect = self.imageRect.move((self.pos_x, self.pos_y))
-		gameDisplay.blit(self.image, self.imageRect)
+		gameDisplay.blit(self.image, self.imageRect) 
 
-class displayText:
+class displayText: #parameters: self, text_list, line = 0, size = 40, color = white, pos_x = 0, pos_y = 0, font = 'Comics Sans MS'
 
 	def __init__(self, text_list, line = 0, size = 40, color = white, pos_x = 0, pos_y = 0, font = 'Comics Sans MS'):
 
@@ -105,22 +112,24 @@ class displayText:
 			clock.tick(60)
 			pygame.time.wait(40)
 
-class passiveScene:
+class passiveScene: #self, scene_name, next_scene = None, next_type = None
 
-	def __init__(self, scene_name, next_scene = None):
+	def __init__(self, scene_name, next_type = 'passiveScene'):
 
 		global scenery
 		global character
 		global dialogue
+		global nexts
 		self.game_quit = False
 		self.scene_done = False
 		self.line = 0
 		self.scene_name = scene_name
-		self.text_list = dialogue.get(scene_name)
-		self.next_scene = next_scene
+		self.text_list = dialogue.get(self.scene_name)
+		self.next_scene = nexts.get(self.scene_name)
+		self.next_type = next_type
 		gameDisplay.fill(black)
-		renderImage(scenery.get(scene_name)).center()
-		renderImage(character.get(scene_name), 0, 900).midtop()
+		renderImage(scenery.get(self.scene_name)).center()
+		renderImage(character.get(self.scene_name), 0, 100).midtop()
 
 	def execute(self):
 
@@ -132,23 +141,21 @@ class passiveScene:
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if event.button == 1:
 						renderImage(scenery.get(self.scene_name)).center()
+						renderImage(character.get(self.scene_name), 0, 100).midtop()
 						self.line += 1
+						if self.line == len(self.text_list):
+							string_to_callable(self.next_type)(self.next_scene).execute()
 						self.scene_done = False
 			if not self.scene_done:
-				displayText(self.text_list, self.line, 45, white, 300, 360).active()
+				displayText(self.text_list, self.line, 45, black, 300, 360).active()
 				self.scene_done = True
 				continue
-			elif self.scene_done:
-				displayText(self.text_list, self.line, 45, white, 300, 360).passive()
+			else:
+				displayText(self.text_list, self.line, 45, black, 300, 360).passive()
 				self.scene_done = True
 				continue
-			elif self.left_click:
-				self.line += 1
-				self.scene_done = False
-				continue
 
-passiveScene('Scene3').execute()
-
+passiveScene('Scene1').execute()
 
 def screen2():
 
