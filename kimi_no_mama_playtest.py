@@ -2,11 +2,11 @@ import pygame, sys
 from pygame.locals import *
 import time
 
-display_width = 1366
-display_height = 768
+display_width = 1280
+display_height = 720
 
 pygame.init()
-gameDisplay = pygame.display.set_mode((1366,768), pygame.FULLSCREEN)
+gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
 pygame.display.toggle_fullscreen
 pygame.display.set_caption('Kimi no Mama')
 gameIcon = pygame.image.load('images/images.png')
@@ -20,8 +20,23 @@ red = (255, 0, 0)
 green = (0, 200, 0)
 blue = (0, 0, 255)
 
-#something for fps, will be called later on
 clock = pygame.time.Clock()
+
+def button(pos_x, pos_y, image, action = None, text = None):
+    mouse = pygame.mouse.get_pos()
+    left_click, scroll, right_click = pygame.mouse.get_pressed()
+    clicked = False
+    button_width = 175 #This may vary based from playtests
+    button_height = 50 #This may vary based from playtests
+    buttonRect = pygame.draw.rect(gameDisplay,transparent, [pos_x,pos_y, button_width, button_height])
+
+    if buttonRect.collidepoint(mouse):
+        renderImage('hover' + image, pos_x, pos_y).coordinates()
+        if left_click and action:
+            action()
+
+    else:
+        renderImage(image, pos_x, pos_y).coordinates()
 
 class renderImage:
 
@@ -51,22 +66,6 @@ class renderImage:
         self.imageRect = self.imageRect.move((self.pos_x, self.pos_y))
         gameDisplay.blit(self.image, self.imageRect)
 
-def button(pos_x, pos_y, image, action = None, text = None):
-    mouse = pygame.mouse.get_pos()
-    left_click, scroll, right_click = pygame.mouse.get_pressed()
-    clicked = False
-    button_width = 175 #This may vary based from playtests
-    button_height = 50 #This may vary based from playtests
-    buttonRect = pygame.draw.rect(gameDisplay,transparent, [pos_x,pos_y, button_width, button_height])
-
-    if buttonRect.collidepoint(mouse):
-        renderImage('hover' + image, pos_x, pos_y).coordinates()
-        if left_click and action:
-            action()
-
-    else:
-        renderImage(image, pos_x, pos_y).coordinates()
-
 def display_text_passive(text, size, color, pos_x, pos_y):
 
     font = pygame.font.SysFont('Times New Roman', size)
@@ -82,9 +81,8 @@ def display_text_active(text_list, size, color, pos_x, pos_y):
     left_click, scroll, right_click = pygame.mouse.get_pressed()
     font = pygame.font.SysFont('Times New Roman', size)
     line = 0
-    while line != len(text_list):
-
-        for i in range(len(text_list)):
+    for line in len(text_list):
+        for character in line:
             string += text_list[i]
             textSurface = font.render(string, True, color)
             textRect = textSurface.get_rect()
@@ -95,14 +93,16 @@ def display_text_active(text_list, size, color, pos_x, pos_y):
             pygame.time.wait(40)
         display_text_passive(text_list, size, color, pos_x, pos_y)
         line += 1
+'''
     while left_click and line != 3:
         print ('I did  something but yep')
         display_text_active(text_list, size, color, pos_x, pos_y)
+'''
 
 def start():
 
     gameDisplay.fill(white)
-    renderImage('placeholder_bg1', 0, 0).center()
+    renderImage('placeholder_bg1').center()
     game_done = False
 
     while not game_done:
@@ -111,7 +111,7 @@ def start():
                 pygame.quit()
                 quit()
 
-        renderImage('mom', 150,30).center()
+        renderImage('mom').center()
 
         button(100, 450, 'button1', screen1)
         button(500, 450, 'button2', screen2)
@@ -125,7 +125,7 @@ def start():
 def screen1():
 
     gameDisplay.fill(white)
-    renderImage('placeholder_green', 0, 0).center()
+    renderImage('placeholder_green').center()
     game_done = False
     scene_done = False
 
@@ -135,8 +135,8 @@ def screen1():
                 pygame.quit()
                 quit()
 
-        renderImage('mom.png', 150,30).center()
-        renderImage('truepanel', 0, 460).midtop()
+        renderImage('mom').center()
+        renderImage('panel', 0, 440).midtop()
 
         button(150, 450, 'button1', screen1)
         button(550, 450, 'button2', screen2)
@@ -152,7 +152,7 @@ def screen1():
 def screen2():
 
     gameDisplay.fill(white)
-    renderImage('placeholder_red.png', 0, 0).center()
+    renderImage('placeholder_red').center()
     game_done = False
 
     while not game_done:
@@ -161,7 +161,7 @@ def screen2():
                 pygame.quit()
                 quit()
 
-        renderImage('mom.png', 150,30).center()
+        renderImage('mom').center()
 
         button(100, 450, 'button1', screen1)
         button(500, 450, 'button2', screen2)
@@ -175,14 +175,14 @@ def screen3():
 
     gameDisplay.fill(white)
     game_done = False
-    renderImage('placeholder_blue.png', 0, 0).center()
+    renderImage('placeholder_blue').center()
     while not game_done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        renderImage('mom.png', 150,30).center()
+        renderImage('mom').center()
 
         button(100, 450, 'button1', screen1)
         button(500, 450, 'button2', screen2)
@@ -196,7 +196,7 @@ def screen4():
 
     gameDisplay.fill(white)
     game_done = False
-    renderImage('placeholder_purple.png', 0, 0).center()
+    renderImage('placeholder_purple').center()
 
     while not game_done:
         for event in pygame.event.get():
@@ -204,7 +204,7 @@ def screen4():
                 pygame.quit()
                 quit()
 
-        renderImage('mom.png', 150,30).center()
+        renderImage('mom').center()
 
         button(100, 450, 'button1', screen1)
         button(500, 450, 'button2', screen2)
