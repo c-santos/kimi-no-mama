@@ -9,25 +9,68 @@ panel_height = 138
 panel_pos_y = 490
 panel_offset = display_height - (panel_pos_y + 200)
 
-#a dictionary of everything
-buttons = ('button_green', 'button_green', 'button_green')
+# Kung gusto niyo itry if nagana yung scene, you can run the code tas click ka lang until makapunta ka sa scene na yun
+# Or call the function in def main()
+# Format ng pagcall ay sceneType('sceneName').execute(), example yung first line sa main
 
+# VARIABLES
+# A tuple of button names, nothing special here, unless we decide to change button graphics
+buttons = ('button_blue', 'button_green', 'button_orange')
+
+# A dictionary of scenes and the background to be used
+# As of now, only one background can be called per scene
+# Format is key:value with key is the scene name and value is name of background image without extension
+# In general, images in our code should be called without the extension
+# Extension should be .png
+# Elements should be a string
 scenery = {'Intro': 'dark_background', 'Intro2': 'dark_background', 'Intro3': 'dark_background', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dIntro': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
 
+# A dictionary of scene names and the characters involved
+# As of now, only one character can be called per scene
+# Same format as scenery but value is name of character image
+# If there is no character involved in the scene, pass an empty string
 character = {'Intro': '', 'Intro2': '', 'Intro3': '', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dIntro': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
 
+# A dicionary of scene names and the type of scene
+# There are two scene types as of now, passiveScene and activeScene
+# The capitalization of S is important
+# passive is dialog only, while active involves decision
+# Decision scenes will always accompany 3 choices
+# Button and text placement will be changed
+# Same format but value is the type of scene
 scene_types = {'Intro': 'passiveScene', 'Intro2': 'passiveScene', 'Intro3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dIntro': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
 
-dialogue = {'Intro': [('SELF', 'Why is it so dark in here?'),('SELF', 'Hmmm somebody must have turned off the lights'),('SELF', 'Seriously though, where am I?'),('SELF', 'But ... but first who am I?')], 'Intro2': [('.devs', '*some sort of special scene here*'),('.devs', 'haven\'t coded it yet'),('.devs', 'should be an enter name prompt')], 'Intro3': [('.devs', 'Oof game devs suck'), ('.devs', 'should be an enter name prompt'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
+# A dictionary of scene names and the dialog to be played
+# This is exclusive to passiveScenes
+# By default, activeScene plays the dialog 'Change your fate Kid'
+# Format is scenename:dialog where dialog is a list
+# The list should contain tuples with two elements
+# Number of tuples inside the list may vary depending on scene but tuples will always have 2 elements
+# The tuple format is (speaker, dialog)
+dialogue = {'Intro': [('SELF', 'Why is it so dark in here?'),('SELF', 'Hmmm somebody must have turned off the lights'),('SELF', 'Seriously though, where am I?'),('SELF', 'But ... but first who am I?')], 'Intro2': [('devs', '*some sort of special scene here*'),('devs', 'haven\'t coded it yet'),('devs', 'should be an enter name prompt')], 'Intro3': [('devs', 'Oof'), ('devs', 'Sorry game devs suck'), ('devs', 'From now on, you\'re name\'s \"Kid\"'), ('devs', 'Deal with it')], 'Scene4': [('devs', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
 
+# A dictionary that determines which scene is next
+# Exclusive to passiveScene only, if you want to determine next scene of activeScene use outcome_actions
+# Format is key:value where key is the current scene and value is the next scene
 nexts = {'Intro': 'Intro2', 'Intro2': 'Intro3', 'Intro3': 'dScene2', 'Scene4': 'Scene5', 'Scene5': 'dScene3', 'Scene6': 'Intro'}
 
+# A dictionary of the choices in activeScene
+# Key:value format, key is scene name while value is a tuple with 3 elements
+# Tuple's format is (choice1, choice2, choice3) from top to bottom
 choice_texts = {'dIntro': ('Yes', 'or', 'Yes'), 'dScene2': ('What', 'is', 'Love?'), 'dScene3': ('Merry', 'and', 'Happy'), 'dScene4': ('Heart', 'Shaker', '*'), 'dScene5': ('Eye', 'Eye', 'Eyes'), 'dScene6': ('Stay', 'by my', 'Side')}
 
+# A dictionary of outcome texts for an active scene
+# Haven't implented this yet
 outcome_texts = {'dIntro': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
 
+# A dictionary of next scenes for activeScene
+# Basically, 'if i press this button, then ill go to this scene'
+# Key:value format where value is a tuple of next scenes
+# Value is (sceneA, sceneB, sceneC), arranged from top to bottom
 outcome_actions = {'dIntro': ('dScene4', 'Intro2', 'dScene3'), 'dScene2': ('dIntro', 'dScene4', 'dScene3'), 'dScene3': ('dIntro', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dIntro')}
 
+# Should be a dictionary where there are some special interactions in a scene
+# Will find a way to interact with this
 oddities = {}
 
 pygame.init()
@@ -98,9 +141,7 @@ class renderImage: #filename, image_type = '', pos_x = 0, pos_y = 0, path = 'ima
 class displayText: #parameters: text_list, line = 0, size = 45, color = white, pos_x = 0, pos_y = 0, font = None
 
 	def __init__(self, text_list, line = 0, size = 35, color = white, pos_x = 0, pos_y = 0, font = 'assets/RobotoMono.ttf'):
-		#global display_height
-		#global panel_offset
-		#global panel_height
+
 		self.text_list = text_list
 		self.line = line
 		self.font = font
@@ -156,12 +197,6 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 
 	def __init__(self, scene_name):
 
-		#global scenery
-		#global character
-		#global dialogue
-		#global nexts
-		#global panel_pos_y
-		#global scene_types
 		self.game_quit = False
 		self.scene_done = False
 		self.scene_name = scene_name
@@ -226,12 +261,7 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 class activeScene: 
 
 	def __init__(self, scene_name):
-		#global scenery
-		#global choice_texts
-		#global outcome_actions
-		#global outcome_texts
-		#global oddities
-		#global buttons
+
 		self.game_quit = False
 		self.scene_name = scene_name
 		self.outcome_text = outcome_texts.get(self.scene_name)
@@ -247,6 +277,8 @@ class activeScene:
 		self.char_pos_x = 700
 		self.char_pos_y = 150
 		self.button_offset_x = 70
+		self.text_pos_x = 150
+		self.text_button_os_y = 24
 		self.button_offset_y = 4
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
@@ -262,10 +294,11 @@ class activeScene:
 		if self.oddity:
 			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
 		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
-		displayText('DEVS', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
-		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivecenter()
-		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivecenter()
-		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivecenter()
+		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.text_button_os_y).passivemidleft()
+		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.text_button_os_y + 60).passivemidleft()
+		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.text_button_os_y + 120).passivemidleft()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
