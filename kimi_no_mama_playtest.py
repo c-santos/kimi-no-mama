@@ -2,8 +2,24 @@ import pygame, sys
 from pygame.locals import *
 import time
 
+#dimensions variable
 display_width = 1280
 display_height = 720
+panel_height = 138
+panel_pos_y = 490
+panel_offset = display_height - (panel_pos_y + 200)
+
+#a dictionary of everything
+buttons = ('button_green', 'button_green', 'button_green')
+scenery = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dScene1': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
+character = {'Scene1': '', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dScene1': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
+scene_types = {'Scene1': 'passiveScene', 'Scene2': 'passiveScene', 'Scene3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dScene1': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
+dialogue = {'Scene1': [('', '*awesome intro*')], 'Scene2': [('Momo', 'badaya uriwa gachi nora'), ('Momo', 'barama neodo ijjogeuro wa')], 'Scene3': [('Jeongyeon', 'dalppit jomyeong araeseo'), ('Jeongyeon', 'neowa nawa sesanggwa'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
+nexts = {'Scene1': 'dScene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Scene1'}
+choice_texts = {'dScene1': ('Yes', 'or', 'Yes'), 'dScene2': ('Yes', 'or', 'Yes'), 'dScene3': ('Yes', 'or', 'Yes'), 'dScene4': ('Yes', 'or', 'Yes'), 'dScene5': ('Yes', 'or', 'Yes'), 'dScene6': ('Yes', 'or', 'Yes')}
+outcome_texts = {'dScene1': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
+outcome_actions = {'dScene1': ('dScene4', 'Scene2', 'dScene3'), 'dScene2': ('dScene1', 'dScene4', 'dScene3'), 'dScene3': ('dScene1', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dScene1')}
+oddities = {}
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
@@ -12,19 +28,9 @@ pygame.display.set_caption('Kimi no Mama')
 gameIcon = pygame.image.load('assets/icon.png')
 pygame.display.set_icon(gameIcon)
 
-#a dictionary of everything
-scenery = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple'}
-character = {'Scene1': 'mom-angry', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger'}
-scene_types = {'Scene1': 'passiveScene', 'Scene2': 'passiveScene', 'Scene3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene'}
-dialogue = {'Scene1': [('', '*awesome intro*'), ('Nayeon', 'you and me in the moonlight'), ('Nayeon', 'byeol kkot chukje yeollin bam'), ('Sana','pado sorireul teulgo'), ('Sana', 'chumeul chuneon ni sungan'), ('Sana', 'i neukkim jeongmal ttagya')], 'Scene2': [('Momo', 'badaya uriwa gachi nora'), ('Momo', 'barama neodo ijjogeuro wa')], 'Scene3': [('Jeongyeon', 'dalppit jomyeong araeseo'), ('Jeongyeon', 'neowa nawa sesanggwa'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
-nexts = {'Scene1': 'Scene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Scene1'}
-choices = {'dScene1': ('Yes', 'or', 'Yes'), 'dScene2': ('Yes', 'or', 'Yes'), 'dScene3': ('Yes', 'or', 'Yes'), 'dScene4': ('Yes', 'or', 'Yes'), 'dScene5': ('Yes', 'or', 'Yes'), 'dScene6': ('Yes', 'or', 'Yes')}
-outcome_text = {'dScene1': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
-outcome_action = outcome_text = {'dScene1': ('dScene4', 'dScene2', 'dScene3'), 'dScene2': ('dScene1', 'dScene4', 'dScene3'), 'dScene3': ('dScene1', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dScene1')}
-
 #colors in a tuple
 black = (0, 0, 0)
-transparent = (255, 255, 255, 100)
+transparent = (0, 0, 255, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
 green = (0, 200, 0)
@@ -32,18 +38,13 @@ blue = (0, 0, 255)
 
 clock = pygame.time.Clock()
 
-#some_variables
-panel_height = 138
-panel_pos_y = 490
-panel_offset = display_height - (panel_pos_y + 200)
-
 def string_to_callable(string): #parameters: string
 
-	callables = {'passiveScene':passiveScene}
+	callables = {'passiveScene':passiveScene, 'activeScene':activeScene}
 	callable_name = callables.get(string)
 	return callable_name
 
-def button(pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
+def button(pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
 
 	mouse_position = pygame.mouse.get_pos()
 	left_click, scroll, right_click = pygame.mouse.get_pressed()
@@ -52,7 +53,6 @@ def button(pos_x, pos_y, image, image_type = 'button/', action = None, button_wi
 	if buttonRect.collidepoint(mouse_position):
 		renderImage('hover' + image, image_type, pos_x, pos_y).coordinates()
 		if left_click and action:
-			renderImage(image, pos_x, pos_y, image_type).coordinates()
 			action()
 
 	else:
@@ -124,7 +124,6 @@ class displayText: #parameters: text_list, line = 0, size = 45, color = white, p
 			pygame.display.update()
 			clock.tick(60)
 
-
 	def passive(self):
 
 		fontography = pygame.font.Font(self.font, self.size)
@@ -136,31 +135,37 @@ class displayText: #parameters: text_list, line = 0, size = 45, color = white, p
 
 class passiveScene: #scene_name, next_type = 'passiveScene'
 
-	def __init__(self, scene_name, next_type = 'passiveScene'):
+	def __init__(self, scene_name):
 
 		global scenery
 		global character
 		global dialogue
 		global nexts
 		global panel_pos_y
+		global scene_types
 		self.game_quit = False
 		self.scene_done = False
 		self.line = 0
 		self.scene_name = scene_name
 		self.next_scene = nexts.get(self.scene_name)
-		self.next_type = string_to_callable(next_type)
+		self.background = scenery.get(self.scene_name)
+		self.speaker = character.get(self.scene_name)
+		self.next_type = string_to_callable(scene_types.get(self.next_scene))
 		self.speaker_pos_x = 135
 		self.speaker_pos_y = 518
 		self.text_pos_x = 200
+		self.char_pos_x = 500
 		self.char_pos_y = 150
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.color = white
 		gameDisplay.fill(self.color)
-		renderImage(scenery.get(self.scene_name), 'scenery/').center()
-		renderImage(character.get(self.scene_name), 'character/', 0, self.char_pos_y).midtop()
+		renderImage(self.background, 'scenery/').center()
+		if self.speaker:
+			renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 		renderImage('panel', '', 0, self.panel_pos_y).midtop()
+
 
 	def execute(self):
 
@@ -171,8 +176,8 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 					quit()
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if event.button == 1:
-						renderImage(scenery.get(self.scene_name), 'scenery/').center()
-						renderImage(character.get(self.scene_name), 'character/', 0, self.char_pos_y).midtop()
+						renderImage(self.background, 'scenery/').center()
+						renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 						renderImage('panel', '', 0, self.panel_pos_y).midtop()
 						self.line += 1
 						if self.line == len(dialogue.get(self.scene_name)):
@@ -185,8 +190,8 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 				self.scene_done = True
 				continue
 			else:
-				renderImage(scenery.get(self.scene_name), 'scenery/').center()
-				renderImage(character.get(self.scene_name), 'character/', 0, self.char_pos_y).midtop()
+				renderImage(self.background, 'scenery/').center()
+				renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 				renderImage('panel', '', 0, self.panel_pos_y).midtop()
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color, self.speaker_pos_x, self.speaker_pos_y).passive()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).passive_panel()
@@ -196,107 +201,80 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 
 			clock.tick(60)
 
-class activeScene:
+class activeScene: 
 
-	def __init__(self, scene_name, next_scene_list, next_type = 'passiveScene'):
+	def __init__(self, scene_name):
 		global scenery
-		global choices
-		global outcome_action
-		global outcome_text
+		global choice_texts
+		global outcome_actions
+		global outcome_texts
+		global oddities
+		global buttons
+		self.scene_name = scene_name
+		self.outcome_text = outcome_texts.get(self.scene_name)
+		self.possible_outcomes = outcome_actions.get(self.scene_name)
+		self.choices = choice_texts.get(self.scene_name)
+		self.background = scenery.get(self.scene_name)
+		self.speaker = character.get(self.scene_name)
+		self.oddity = oddities.get(scene_name)
+		self.speaker_pos_x = 135
+		self.speaker_pos_y = 518
+		self.button_pos_x = 250
+		self.button_pos_y = 310
+		self.char_pos_x = 700
+		self.char_pos_y = 150
+		self.button_offset_x = 70
+		self.button_offset_y = 3
+		self.panel_pos_y = panel_pos_y
+		self.dialog_text_size = 37
+		self.speaker_text_size = 35
+		self.color = white
 		self.game_quit = False
 
 	def execute(self):
-		pass
+		gameDisplay.fill(self.color)
+		renderImage(self.background, 'scenery/').center()
+		if self.speaker:
+			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
+		if self.oddity:
+			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
+		renderImage('panel', '', 0, self.panel_pos_y).midtop()
+		displayText('DEVS', 0, self.speaker_text_size, self.color, self.speaker_pos_x, self.speaker_pos_y).passive()
+		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passive()
+		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passive()
+		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passive()
+		while not self.game_quit:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+					quit()
+			buttonss(self.button_pos_x, self.button_pos_y, buttons[0], self.possible_outcomes[0])
+			buttonss(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.possible_outcomes[1])
+			buttonss(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.possible_outcomes[2])
+			pygame.display.update()
+			clock.tick(60)
 
-def start():
+def buttonss(pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
+    global scene_types
 
-	gameDisplay.fill(white)
-	renderImage('placeholder_bg1').center()
-	game_done = False
+    mouse_position = pygame.mouse.get_pos()
+    left_click, scroll, right_click = pygame.mouse.get_pressed()
+    buttonRect = pygame.draw.rect(gameDisplay, transparent, [pos_x,pos_y, button_width, button_height])
 
-	while not game_done:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-				quit()
+    if buttonRect.collidepoint(mouse_position):
+        renderImage('hover' + image, image_type, pos_x, pos_y).coordinates()
+        if left_click and action:
+            renderImage(image, image_type, pos_x, pos_y).coordinates()
+            string_to_callable(scene_types.get(action))(action).execute()
 
-		renderImage('mom').center()
+    else:
+        renderImage(image, image_type, pos_x, pos_y).coordinates()
 
-		button(100, 450, 'button1', screen1, 175, 50)
-		button(500, 450, 'button2', screen2, 175, 50)
-		button(100, 510, 'button3', screen3, 175, 50)
-		button(500, 510, 'button4', screen4, 175, 50)
-		pygame.display.update()
+def main():
 
-		clock.tick(60)
+	passiveScene('Scene1').execute()
+	pygame.quit()
+	quit()
 
-passiveScene('Scene1').execute()
-
-def screen1():
-
-	gameDisplay.fill(white)
-	renderImage('placeholder_green').center()
-	game_done = False
-
-	while not game_done:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-				quit()
-
-		renderImage('mom').center()
-		renderImage('panel', 0, 440).midtop()
-
-		button(100, 510, 'button_blue', screen1)
-		button(100, 570, 'button_green', screen2)
-		button(100, 630, 'button_orange', screen3)
-				
-		pygame.display.update()
-
-		clock.tick(60)
-
-def screen3(): 
-
-	gameDisplay.fill(white)
-	game_done = False
-	renderImage('placeholder_blue').center()
-	while not game_done:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-				quit()
-
-		renderImage('mom').center()
-
-		button(100, 450, 'button1', screen1, 175, 50)
-		button(500, 450, 'button2', screen2, 175, 50)
-		button(100, 510, 'button3', screen3, 175, 50)
-		button(500, 510, 'button4', screen4, 175, 50)
-
-		pygame.display.update()
-		clock.tick(60)
-
-def screen4():
-
-	gameDisplay.fill(white)
-	game_done = False
-	renderImage('placeholder_purple').center()
-
-	while not game_done:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
-				quit()
-
-		renderImage('mom').center()
-
-		button(100, 450, 'button1', screen1, 175, 50)
-		button(500, 450, 'button2', screen2, 175, 50)
-		button(100, 510, 'button3', screen3, 175, 50)
-		button(500, 510, 'button4', screen4, 175, 50)
-		pygame.display.update()
-		clock.tick(60)
-
-start()
-pygame.quit()
-quit()
+if __name__ == '__main__':
+	main()
