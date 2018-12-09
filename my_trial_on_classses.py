@@ -2,9 +2,9 @@ def lulu(a, b):
     return a + b
 
 class Add:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+    def __init__(self):
+        self.a = 3
+        self.b = 3
         self.c = self.a + self.b
     def addition(self):
         return lulu(self.a, self.b)
@@ -22,11 +22,19 @@ class Another_Add:
     def subtract(self):
         pass
 
-some_variable = Add(3, 4).addition()
-some_variablex = Add(3, 4).lul()
-some_variables = Another_Add(3,3).addition()
-print (some_variablex)
-print (some_variables)
+class Another_Class(Add):
+
+    def __init__(self, d):
+        Add.__init__(self)
+        self.d = d
+    def subtractt(self):
+        return self.d - self.c
+#some_variable = Add(3, 4).addition()
+#some_variablex = Add(3, 4).lul()
+#some_variables = Another_Add(3,3).addition()
+print (Another_Class(3).subtractt())
+#print (some_variablex)
+#print (some_variables)
 
 dictionary = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple'}
 
