@@ -1,6 +1,4 @@
 import pygame, sys
-from pygame.locals import *
-import time
 
 #dimensions variable
 display_width = 1280
@@ -80,23 +78,21 @@ pygame.display.set_caption('Kimi no Mama')
 gameIcon = pygame.image.load('assets/icon.png')
 pygame.display.set_icon(gameIcon)
 
-#colors in a tuple
+#colors
 black = (0, 0, 0)
-transparent = (0, 0, 255, 0)
 white = (255, 255, 255)
-red = (255, 0, 0)
-green = (0, 200, 0)
-blue = (0, 0, 255)
+gray = (86, 86, 86)
+transparent = (0, 0, 255, 0)
 
 clock = pygame.time.Clock()
 
-def string_to_callable(string): #parameters: string
+def string_to_callable(string):
 
 	callables = {'passiveScene':passiveScene, 'activeScene':activeScene}
 	callable_name = callables.get(string)
 	return callable_name
 
-class renderImage: #filename, image_type = '', pos_x = 0, pos_y = 0, path = 'images/', extension = '.png'
+class renderImage:
 
 	def __init__(self, filename, image_type = '', pos_x = 0, pos_y = 0, path = 'assets/', extension = '.png'):
 		global display_width
@@ -124,13 +120,13 @@ class renderImage: #filename, image_type = '', pos_x = 0, pos_y = 0, path = 'ima
 		self.imageRect = self.imageRect.move((self.pos_x, self.pos_y))
 		gameDisplay.blit(self.image, self.imageRect) 
 
-class displayText: #parameters: text_list, line = 0, size = 45, color = white, pos_x = 0, pos_y = 0, font = None
+class displayText:
 
-	def __init__(self, text_list, line = 0, size = 35, color = white, pos_x = 0, pos_y = 0, font = 'assets/RobotoMono.ttf'):
+	def __init__(self, text_list, line = 0, size = 35, color = white, pos_x = 0, pos_y = 0, font = 'RobotoMono-Regular', path = 'assets/fonts/', extension = '.ttf'):
 
 		self.text_list = text_list
 		self.line = line
-		self.font = font
+		self.font = path + font + extension
 		self.size = size
 		self.color = color
 		self.pos_x = pos_x
@@ -179,7 +175,7 @@ class displayText: #parameters: text_list, line = 0, size = 45, color = white, p
 		gameDisplay.blit(textSurface, textRect)
 		pygame.display.update()
 
-class passiveScene: #scene_name, next_type = 'passiveScene'
+class passiveScene:
 
 	def __init__(self, scene_name):
 
@@ -200,7 +196,8 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.color_text = white
-		self.color_speaker = black
+		self.color_speaker = gray
+		self.speaker_font = 'RobotoMono-Italic'
 
 	def execute(self):
 
@@ -226,7 +223,7 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 						self.scene_done = False
 			self.speaker_name, self.text_list = dialogue.get(self.scene_name)[self.line]
 			if not self.scene_done:
-				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color_text, self.text_pos_x, 0).active_panel()
 				self.scene_done = True
 				continue
@@ -235,7 +232,7 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 				if self.speaker:
 					renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 				renderImage('panel1', '', 0, self.panel_pos_y).midtop()
-				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color_text, self.text_pos_x, 0).passive_panel()
 
 				self.scene_done = True
@@ -243,7 +240,7 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 
 			clock.tick(60)
 
-class activeScene: 
+class activeScene:
 
 	def __init__(self, scene_name):
 
@@ -269,7 +266,8 @@ class activeScene:
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.color = white
-		self.color_speaker = black
+		self.color_speaker = gray
+		self.speaker_font = 'RobotoMono-Italic'
 
 	def execute(self):
 		gameDisplay.fill(self.color)
@@ -279,7 +277,7 @@ class activeScene:
 		if self.oddity:
 			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
 		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
-		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.text_button_os_y).passivemidleft()
 		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.text_button_os_y + 60).passivemidleft()
@@ -295,7 +293,7 @@ class activeScene:
 			pygame.display.update()
 			clock.tick(60)
 
-class clickButton: #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
+class clickButton:
 
 	def __init__(self, pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48):
 		self.pos_x = pos_x
@@ -337,7 +335,8 @@ class clickButton: #parameters: pos_x, pos_y, image, image_type = 'button/', act
 
 def main():
 
-	passiveScene('Intro').execute()
+	a = passiveScene('Intro').execute()
+	print(a)
 	pygame.quit()
 	quit()
 
