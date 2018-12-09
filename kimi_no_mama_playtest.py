@@ -11,14 +11,14 @@ panel_offset = display_height - (panel_pos_y + 200)
 
 #a dictionary of everything
 buttons = ('button_green', 'button_green', 'button_green')
-scenery = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dScene1': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
-character = {'Scene1': '', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dScene1': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
-scene_types = {'Scene1': 'passiveScene', 'Scene2': 'passiveScene', 'Scene3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dScene1': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
-dialogue = {'Scene1': [('', '*awesome intro*')], 'Scene2': [('Momo', 'badaya uriwa gachi nora'), ('Momo', 'barama neodo ijjogeuro wa')], 'Scene3': [('Jeongyeon', 'dalppit jomyeong araeseo'), ('Jeongyeon', 'neowa nawa sesanggwa'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
-nexts = {'Scene1': 'dScene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Scene1'}
-choice_texts = {'dScene1': ('Yes', 'or', 'Yes'), 'dScene2': ('Yes', 'or', 'Yes'), 'dScene3': ('Yes', 'or', 'Yes'), 'dScene4': ('Yes', 'or', 'Yes'), 'dScene5': ('Yes', 'or', 'Yes'), 'dScene6': ('Yes', 'or', 'Yes')}
-outcome_texts = {'dScene1': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
-outcome_actions = {'dScene1': ('dScene4', 'Scene2', 'dScene3'), 'dScene2': ('dScene1', 'dScene4', 'dScene3'), 'dScene3': ('dScene1', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dScene1')}
+scenery = {'Intro': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dIntro': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
+character = {'Intro': '', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dIntro': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
+scene_types = {'Intro': 'passiveScene', 'Scene2': 'passiveScene', 'Scene3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dIntro': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
+dialogue = {'Intro': [('SELF', 'Why is it so dark in here?')], 'Scene2': [('Momo', 'badaya uriwa gachi nora'), ('Momo', 'barama neodo ijjogeuro wa')], 'Scene3': [('Jeongyeon', 'dalppit jomyeong araeseo'), ('Jeongyeon', 'neowa nawa sesanggwa'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
+nexts = {'Intro': 'dScene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Intro'}
+choice_texts = {'dIntro': ('Yes', 'or', 'Yes'), 'dScene2': ('Yes', 'or', 'Yes'), 'dScene3': ('Yes', 'or', 'Yes'), 'dScene4': ('Yes', 'or', 'Yes'), 'dScene5': ('Yes', 'or', 'Yes'), 'dScene6': ('Yes', 'or', 'Yes')}
+outcome_texts = {'dIntro': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
+outcome_actions = {'dIntro': ('dScene4', 'Scene2', 'dScene3'), 'dScene2': ('dIntro', 'dScene4', 'dScene3'), 'dScene3': ('dIntro', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dIntro')}
 oddities = {}
 
 pygame.init()
@@ -88,25 +88,25 @@ class renderImage: #filename, image_type = '', pos_x = 0, pos_y = 0, path = 'ima
 
 class displayText: #parameters: text_list, line = 0, size = 45, color = white, pos_x = 0, pos_y = 0, font = None
 
-	def __init__(self, text_list, line = 0, size = 35, color = white, pos_x = 0, pos_y = 0, font = 'assets/DeJavuSans.ttf'):
-		global display_height
-		global panel_offset
-		global panel_height
+	def __init__(self, text_list, line = 0, size = 35, color = white, pos_x = 0, pos_y = 0, font = 'assets/RobotoMono.ttf'):
+		#global display_height
+		#global panel_offset
+		#global panel_height
 		self.text_list = text_list
 		self.line = line
 		self.font = font
 		self.size = size
 		self.color = color
 		self.pos_x = pos_x
-		self.pos_y = display_height - (panel_offset + panel_height/2)
-		self.pos_y_speaker = pos_y
+		self.pos_y = pos_y
+		self.pos_y_mid = display_height - (panel_offset + panel_height/2)
 
 	def passive_panel(self):
 
 		fontography = pygame.font.Font(self.font, self.size)
 		textSurface = fontography.render(self.text_list, True, self.color)
 		textRect = textSurface.get_rect()
-		textRect.midleft = (self.pos_x, self.pos_y)
+		textRect.midleft = (self.pos_x, self.pos_y_mid)
 		gameDisplay.blit(textSurface, textRect)
 		pygame.display.update()
 
@@ -115,21 +115,31 @@ class displayText: #parameters: text_list, line = 0, size = 45, color = white, p
 		string = ''
 		fontography = pygame.font.Font(self.font, self.size)
 		for character in self.text_list:
+			pygame.event.clear()
 			pygame.time.wait(40)
 			string += character
 			textSurface = fontography.render(string, True, self.color)
 			textRect = textSurface.get_rect()
-			textRect.midleft = (self.pos_x, self.pos_y)
+			textRect.midleft = (self.pos_x, self.pos_y_mid)
 			gameDisplay.blit(textSurface, textRect)
 			pygame.display.update()
 			clock.tick(60)
 
-	def passive(self):
+	def passivecenter(self):
 
 		fontography = pygame.font.Font(self.font, self.size)
 		textSurface = fontography.render(self.text_list, True, self.color)
 		textRect = textSurface.get_rect()
-		textRect.topleft = (self.pos_x, self.pos_y_speaker)
+		textRect.center = (self.pos_x, self.pos_y)
+		gameDisplay.blit(textSurface, textRect)
+		pygame.display.update()
+
+	def passivemidleft(self):
+
+		fontography = pygame.font.Font(self.font, self.size)
+		textSurface = fontography.render(self.text_list, True, self.color)
+		textRect = textSurface.get_rect()
+		textRect.midleft = (self.pos_x, self.pos_y)
 		gameDisplay.blit(textSurface, textRect)
 		pygame.display.update()
 
@@ -137,38 +147,39 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 
 	def __init__(self, scene_name):
 
-		global scenery
-		global character
-		global dialogue
-		global nexts
-		global panel_pos_y
-		global scene_types
+		#global scenery
+		#global character
+		#global dialogue
+		#global nexts
+		#global panel_pos_y
+		#global scene_types
 		self.game_quit = False
 		self.scene_done = False
-		self.line = 0
 		self.scene_name = scene_name
+		self.line = 0
 		self.next_scene = nexts.get(self.scene_name)
 		self.background = scenery.get(self.scene_name)
 		self.speaker = character.get(self.scene_name)
 		self.next_type = string_to_callable(scene_types.get(self.next_scene))
-		self.speaker_pos_x = 135
-		self.speaker_pos_y = 518
-		self.text_pos_x = 200
+		self.char_name_pos_x = 195
+		self.char_name_pos_y = 550
 		self.char_pos_x = 500
 		self.char_pos_y = 150
+		self.text_pos_x = 200
+		#self.text_pos_y = 0 
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
-		self.color = white
-		gameDisplay.fill(self.color)
-		renderImage(self.background, 'scenery/').center()
-		if self.speaker:
-			renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-		renderImage('panel', '', 0, self.panel_pos_y).midtop()
-
+		self.color_text = white
+		self.color_speaker = black
 
 	def execute(self):
 
+		gameDisplay.fill(self.color_text)
+		renderImage(self.background, 'scenery/').center()
+		if self.speaker:
+			renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
+		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -177,24 +188,26 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 				if event.type == pygame.MOUSEBUTTONDOWN:
 					if event.button == 1:
 						renderImage(self.background, 'scenery/').center()
-						renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-						renderImage('panel', '', 0, self.panel_pos_y).midtop()
+						if self.speaker:
+							renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
+						renderImage('panel1', '', 0, self.panel_pos_y).midtop()
 						self.line += 1
 						if self.line == len(dialogue.get(self.scene_name)):
 							self.next_type(self.next_scene).execute()
 						self.scene_done = False
 			self.speaker_name, self.text_list = dialogue.get(self.scene_name)[self.line]
 			if not self.scene_done:
-				displayText(self.speaker_name, 0, self.speaker_text_size, self.color, self.speaker_pos_x, self.speaker_pos_y).passive()
-				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+				displayText(self.text_list, self.line, self.dialog_text_size, self.color_text, self.text_pos_x, 0).active_panel()
 				self.scene_done = True
 				continue
 			else:
 				renderImage(self.background, 'scenery/').center()
-				renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-				renderImage('panel', '', 0, self.panel_pos_y).midtop()
-				displayText(self.speaker_name, 0, self.speaker_text_size, self.color, self.speaker_pos_x, self.speaker_pos_y).passive()
-				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).passive_panel()
+				if self.speaker:
+					renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
+				renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+				displayText(self.text_list, self.line, self.dialog_text_size, self.color_text, self.text_pos_x, 0).passive_panel()
 
 				self.scene_done = True
 				continue
@@ -204,12 +217,13 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 class activeScene: 
 
 	def __init__(self, scene_name):
-		global scenery
-		global choice_texts
-		global outcome_actions
-		global outcome_texts
-		global oddities
-		global buttons
+		#global scenery
+		#global choice_texts
+		#global outcome_actions
+		#global outcome_texts
+		#global oddities
+		#global buttons
+		self.game_quit = False
 		self.scene_name = scene_name
 		self.outcome_text = outcome_texts.get(self.scene_name)
 		self.possible_outcomes = outcome_actions.get(self.scene_name)
@@ -217,19 +231,19 @@ class activeScene:
 		self.background = scenery.get(self.scene_name)
 		self.speaker = character.get(self.scene_name)
 		self.oddity = oddities.get(scene_name)
-		self.speaker_pos_x = 135
-		self.speaker_pos_y = 518
+		self.char_name_pos_x = 195
+		self.char_name_pos_y = 550
 		self.button_pos_x = 250
 		self.button_pos_y = 310
 		self.char_pos_x = 700
 		self.char_pos_y = 150
 		self.button_offset_x = 70
-		self.button_offset_y = 3
+		self.button_offset_y = 4
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.color = white
-		self.game_quit = False
+		self.color_speaker = black
 
 	def execute(self):
 		gameDisplay.fill(self.color)
@@ -238,11 +252,11 @@ class activeScene:
 			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
 		if self.oddity:
 			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
-		renderImage('panel', '', 0, self.panel_pos_y).midtop()
-		displayText('DEVS', 0, self.speaker_text_size, self.color, self.speaker_pos_x, self.speaker_pos_y).passive()
-		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passive()
-		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passive()
-		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passive()
+		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+		displayText('DEVS', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y).passivecenter()
+		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivecenter()
+		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivecenter()
+		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivecenter()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -272,7 +286,7 @@ def buttonss(pos_x, pos_y, image, action = None, image_type = 'buttons/', button
 
 def main():
 
-	passiveScene('Scene1').execute()
+	passiveScene('Intro').execute()
 	pygame.quit()
 	quit()
 

@@ -32,7 +32,7 @@ dictionary = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3'
 
 a = dictionary.get('Scene4')
 print (a)
-
+'''
 import pygame, sys
 from pygame.locals import *
  
@@ -62,7 +62,7 @@ while True:
             sys.exit()
  
     clock.tick(20)
-
+'''
 buttons = ('button_blue', 'button_green', 'button_orange')
 scenery = {'Scene1': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dScene1': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
 character = {'Scene1': 'mom-angry', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dScene1': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
@@ -286,3 +286,27 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
                 continue
 
             clock.tick(60)
+
+def text_ani(str, tuple):
+    x, y = tuple
+    y = y*line_space ##shift text down by one line
+    char = ''        ##new string that will take text one char at a time. Not the best variable name I know.
+    letter = 0
+    count = 0
+    for i in range(len(str)):
+        pygame.event.clear() ## this is very important if your event queue is not handled properly elsewhere. Alternativly pygame.event.pump() would work.
+        time.sleep(0.05) ##change this for faster or slower text animation
+        char = char + str[letter]
+        text = basicfont.render(char, False, (2, 241, 16), (0, 0, 0)) #First tuple is text color, second tuple is background color
+        textrect = text.get_rect(topleft=(x, y)) ## x, y's provided in function call. y coordinate amended by line height where needed
+        screen.blit(text, textrect)
+        pygame.display.update(textrect) ## update only the text just added without removing previous lines.
+        count += 1
+        letter += 1
+        print (char) ## for debugging in console, comment out or delete.
+
+
+text_ani('this is line number 1 ', (0, 1)) # text string and x, y coordinate tuple.
+text_ani('this is line number 2', (0, 2))
+text_ani('this is line number 3', (0, 3))
+text_ani('', (0, 3)) # this is a blank line
