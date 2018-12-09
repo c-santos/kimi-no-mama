@@ -11,14 +11,23 @@ panel_offset = display_height - (panel_pos_y + 200)
 
 #a dictionary of everything
 buttons = ('button_green', 'button_green', 'button_green')
-scenery = {'Intro': 'dark_background', 'Scene2': 'placeholder_bg1', 'Scene3': 'placeholder_green', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dIntro': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
-character = {'Intro': '', 'Scene2': 'mom-happy', 'Scene3': 'mom-oface', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dIntro': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
-scene_types = {'Intro': 'passiveScene', 'Scene2': 'passiveScene', 'Scene3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dIntro': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
-dialogue = {'Intro': [('SELF', 'Why is it so dark in here?')], 'Scene2': [('Momo', 'badaya uriwa gachi nora'), ('Momo', 'barama neodo ijjogeuro wa')], 'Scene3': [('Jeongyeon', 'dalppit jomyeong araeseo'), ('Jeongyeon', 'neowa nawa sesanggwa'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
-nexts = {'Intro': 'dScene2', 'Scene2': 'Scene3', 'Scene3': 'Scene4', 'Scene4': 'Scene5', 'Scene5': 'Scene6', 'Scene6': 'Intro'}
-choice_texts = {'dIntro': ('Yes', 'or', 'Yes'), 'dScene2': ('Yes', 'or', 'Yes'), 'dScene3': ('Yes', 'or', 'Yes'), 'dScene4': ('Yes', 'or', 'Yes'), 'dScene5': ('Yes', 'or', 'Yes'), 'dScene6': ('Yes', 'or', 'Yes')}
+
+scenery = {'Intro': 'dark_background', 'Intro2': 'dark_background', 'Intro3': 'dark_background', 'Scene4': 'placeholder_red', 'Scene5': 'placeholder_blue', 'Scene6': 'placeholder_purple', 'dIntro': 'placeholder_red','dScene2': 'placeholder_purple', 'dScene3': 'placeholder_green', 'dScene4': 'dark_background'}
+
+character = {'Intro': '', 'Intro2': '', 'Intro3': '', 'Scene4': 'mom-solo', 'Scene5': 'mom-soloangry', 'Scene6': 'mom-solofinger', 'dIntro': 'mom-angry', 'dScene2': 'mom-happy', 'dScene3': 'mom-oface', 'dScene4': 'mom-solo'}
+
+scene_types = {'Intro': 'passiveScene', 'Intro2': 'passiveScene', 'Intro3': 'passiveScene', 'Scene4': 'passiveScene', 'Scene5': 'passiveScene', 'Scene6': 'passiveScene', 'dIntro': 'activeScene','dScene2': 'activeScene', 'dScene3': 'activeScene', 'dScene4': 'activeScene'}
+
+dialogue = {'Intro': [('SELF', 'Why is it so dark in here?'),('SELF', 'Hmmm somebody must have turned off the lights'),('SELF', 'Seriously though, where am I?'),('SELF', 'But ... but first who am I?')], 'Intro2': [('.devs', '*some sort of special scene here*'),('.devs', 'haven\'t coded it yet'),('.devs', 'should be an enter name prompt')], 'Intro3': [('.devs', 'Oof game devs suck'), ('.devs', 'should be an enter name prompt'), ('Jeongyeon', 'da gachi Party all night long'), ('Jeongyeon', 'Yeah, it’s good')], 'Scene4': [('Tzuyu', 'If you wanna have some fun'), ('Tzuyu', 'jjapjjalhan gonggicheoreom'), ('Tzuyu', 'i sungane teukbyeolhan'), ('Tzuyu',  'haengbogeul notchiji ma')], 'Scene5': [('Mina', 'One, two, three, let\'s go'), ('Mina', 'chouju wiro'), ('Chaeyoung', 'narageul deut chumchureoga hey'), ('Chaeyoung', 'let\'s dance the night away')], 'Scene6': [('', '*music intensifies*'), ('Chaeyoung', 'Let’s dance the night away'), ('Jihyo', 'One, two, three, let’s go'), ('Jihyo', 'jeo bada geonneo'), ('Jihyo', 'deullil deut sori jilleo'), ('Jihyo', 'Let’s dance the night away')]}
+
+nexts = {'Intro': 'Intro2', 'Intro2': 'Intro3', 'Intro3': 'dScene2', 'Scene4': 'Scene5', 'Scene5': 'dScene3', 'Scene6': 'Intro'}
+
+choice_texts = {'dIntro': ('Yes', 'or', 'Yes'), 'dScene2': ('What', 'is', 'Love?'), 'dScene3': ('Merry', 'and', 'Happy'), 'dScene4': ('Heart', 'Shaker', '*'), 'dScene5': ('Eye', 'Eye', 'Eyes'), 'dScene6': ('Stay', 'by my', 'Side')}
+
 outcome_texts = {'dIntro': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene2': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene3': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker')), 'dScene4': (('What', 'is', 'Love?'), ('jjirit', 'jjirit', 'jjirit', 'jjirit'), ('You\'re', 'my', 'heartshaker shaker'))}
-outcome_actions = {'dIntro': ('dScene4', 'Scene2', 'dScene3'), 'dScene2': ('dIntro', 'dScene4', 'dScene3'), 'dScene3': ('dIntro', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dIntro')}
+
+outcome_actions = {'dIntro': ('dScene4', 'Intro2', 'dScene3'), 'dScene2': ('dIntro', 'dScene4', 'dScene3'), 'dScene3': ('dIntro', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dIntro')}
+
 oddities = {}
 
 pygame.init()
@@ -165,7 +174,7 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 		self.char_name_pos_y = 550
 		self.char_pos_x = 500
 		self.char_pos_y = 150
-		self.text_pos_x = 200
+		self.text_pos_x = 150
 		#self.text_pos_y = 0 
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
