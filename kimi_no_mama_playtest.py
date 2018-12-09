@@ -96,20 +96,6 @@ def string_to_callable(string): #parameters: string
 	callable_name = callables.get(string)
 	return callable_name
 
-def button(pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
-
-	mouse_position = pygame.mouse.get_pos()
-	left_click, scroll, right_click = pygame.mouse.get_pressed()
-	buttonRect = pygame.draw.rect(gameDisplay,transparent, [pos_x,pos_y, button_width, button_height])
-
-	if buttonRect.collidepoint(mouse_position):
-		renderImage('hover' + image, image_type, pos_x, pos_y).coordinates()
-		if left_click and action:
-			action()
-
-	else:
-		renderImage(image, pos_x, pos_y).coordinates()
-
 class renderImage: #filename, image_type = '', pos_x = 0, pos_y = 0, path = 'images/', extension = '.png'
 
 	def __init__(self, filename, image_type = '', pos_x = 0, pos_y = 0, path = 'assets/', extension = '.png'):
@@ -210,7 +196,6 @@ class passiveScene: #scene_name, next_type = 'passiveScene'
 		self.char_pos_x = 500
 		self.char_pos_y = 150
 		self.text_pos_x = 150
-		#self.text_pos_y = 0 
 		self.panel_pos_y = panel_pos_y
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
@@ -304,27 +289,51 @@ class activeScene:
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
-			buttonss(self.button_pos_x, self.button_pos_y, buttons[0], self.possible_outcomes[0])
-			buttonss(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.possible_outcomes[1])
-			buttonss(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.possible_outcomes[2])
+			clickButton(self.button_pos_x, self.button_pos_y, buttons[0], self.possible_outcomes[0]).aScene()
+			clickButton(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.possible_outcomes[1]).aScene()
+			clickButton(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.possible_outcomes[2]).aScene()
 			pygame.display.update()
 			clock.tick(60)
 
-def buttonss(pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48): #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
-    global scene_types
+class clickButton: #parameters: pos_x, pos_y, image, image_type = 'button/', action = None, button_width = 48, button_height = 48
 
-    mouse_position = pygame.mouse.get_pos()
-    left_click, scroll, right_click = pygame.mouse.get_pressed()
-    buttonRect = pygame.draw.rect(gameDisplay, transparent, [pos_x,pos_y, button_width, button_height])
+	def __init__(self, pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48):
+		self.pos_x = pos_x
+		self.pos_y = pos_y
+		self.image = image
+		self.action = action
+		self.image_type = image_type
+		self.button_width = button_width
+		self.button_height = button_height
 
-    if buttonRect.collidepoint(mouse_position):
-        renderImage('hover' + image, image_type, pos_x, pos_y).coordinates()
-        if left_click and action:
-            renderImage(image, image_type, pos_x, pos_y).coordinates()
-            string_to_callable(scene_types.get(action))(action).execute()
+	def aScene(self): 
 
-    else:
-        renderImage(image, image_type, pos_x, pos_y).coordinates()
+		mouse_position = pygame.mouse.get_pos()
+		left_click = pygame.mouse.get_pressed()[0]
+		buttonRect = pygame.draw.rect(gameDisplay, transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
+
+		if buttonRect.collidepoint(mouse_position):
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			if left_click and self.action:
+				renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+				string_to_callable(scene_types.get(self.action))(self.action).execute()
+
+		else:
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+
+	def simple(self):
+
+		mouse_position = pygame.mouse.get_pos()
+		left_click = pygame.mouse.get_pressed()[0]
+		buttonRect = pygame.draw.rect(gameDisplay,transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
+
+		if buttonRect.collidepoint(mouse_position):
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			if left_click and self.action:
+				action()
+
+		else:
+			renderImage(self.image, self.pos_x, self.pos_y).coordinates()
 
 def main():
 
