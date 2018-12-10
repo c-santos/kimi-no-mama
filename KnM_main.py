@@ -724,8 +724,8 @@ class displayText:
 
 		string = ''
 		fontography = pygame.font.Font(self.font, self.size)
-		pygame.mixer.music.load('pop.mp3')
-		pygame.mixer.music.play()
+		#pygame.mixer.music.load('pop.mp3')
+		#pygame.mixer.music.play()
 		for character in self.text_list:
 			pygame.event.clear()
 			pygame.time.wait(40)
@@ -896,8 +896,6 @@ class passiveScene(Screen):
 				self.scene_done = True
 				continue
 			pygame.display.update()
-			pygame.mixer.music.load('H1.mp3')
-			pygame.mixer.music.play(-1)
 			clock.tick(90)
 
 class activeScene(Screen):
