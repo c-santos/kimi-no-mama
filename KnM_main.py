@@ -224,7 +224,7 @@ nexts = {
 
 
 	'Credits': '',
-	'GameOver': ('Scene0', '', '')
+	'GameOver': ('Scene0', 'Start', '')
 	}
 
 
@@ -974,6 +974,17 @@ choice_texts = {
 
 # A list of previous the previous scenes, the last element is the latest scene
 previous_scenes = []
+save_checker = []
+previous_save_1 = []
+previous_save_2 = []
+previous_save_3 = []
+previous_save_4 = []
+previous_save_5 = []
+previous_save_6 = []
+previous_save_7 = []
+previous_save_8 = []
+previous_save_9 = []
+previous_save_10 = []
 
 # Should be a dictionary where there are some special interactions in a scene
 # Will find a way to interact with this
@@ -1288,7 +1299,7 @@ class activeScene(Screen):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
-		pygame.mixer.music.load('H2.mp3')
+		pygame.mixer.music.load('H1.mp3')
 		pygame.mixer.music.play(-1)
 
 		while not self.game_quit:
@@ -1460,7 +1471,7 @@ class Load:
 class Save:
 	def saveslot1(self):
 		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + '.txt')
 		i = -1
 		current_scene = previous_scenes[i]
 		pygame.time.delay(200)
@@ -1468,15 +1479,15 @@ class Save:
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			pickle.dump(current_scene, open(save_data_path, 'wb'))
+			previous_save_1.append(save_data_path)
 			save_checker.append(1)
 		else:
 			try:
 				os.remove(previous_save_1[-1])
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(save_data_path, 'wb'))
 
 	def saveslot2(self):
 
@@ -1490,7 +1501,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_2.append(save_data_path)
 			save_checker.append(2)
 		else:
 			try:
@@ -1511,7 +1522,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_3.append(save_data_path)
 			save_checker.append(3)
 		else:
 			try:
@@ -1531,7 +1542,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_4.append(save_data_path)
 			save_checker.append(4)
 		else:
 			try:
@@ -1552,7 +1563,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_5.append(save_data_path)
 			save_checker.append(5)
 		else:
 			try:
@@ -1573,7 +1584,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_6.append(save_data_path)
 			save_checker.append(6)
 		else:
 			try:
@@ -1594,7 +1605,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_7.append(save_data_path)
 			save_checker.append(7)
 		else:
 			try:
@@ -1616,7 +1627,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_8.append(save_data_path)
 			save_checker.append(8)
 		else:
 			try:
@@ -1637,7 +1648,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_9.append(save_data_path)
 			save_checker.append(9)
 		else:
 			try:
@@ -1658,7 +1669,7 @@ class Save:
 				i -= 1
 				current_scene = previous_scenes[i] 
 			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save.append(save_data_path)
+			previous_save_10.append(save_data_path)
 			save_checker.append(10)
 		else:
 			try:
@@ -1666,6 +1677,24 @@ class Save:
 			except OSError:
 				pass
 			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+class oddScene(Screen):
+
+	def __init__(self, scene_name):
+
+		Screen.__init__(self, scene_name)
+		self.scene_done = False
+		self.line = 0
+		self.next_type = string_to_callable(scene_types.get(self.next_scene))
+		previous_scenes.append(scene_name)
+
+	def credits(self):
+
+		gameDisplay.fill(self.color)
+		renderImage(self.background, 'scenery/').center()
+
+def truetime(filename):
+	return filename.replace(':', '-').replace('T', ' ')
 
 def item_use():
 
@@ -1678,12 +1707,6 @@ def save_func():
 def god_menu():
 
 	activeScene().main_menu()
-
-def save():
-
-	current_scene = previous_scenes[-1]
-	pickle.dump(current_scene, open("savedata.txt", "wb"))
-	print(previous_scenes)
 
 def game_quit():
 
