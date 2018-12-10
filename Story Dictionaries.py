@@ -28,7 +28,7 @@ scene_types = {
 		'Scene6.3': 'passiveScene',
 	'Scene7': 'passiveScene',
 	'Scene8': 'passiveScene',
-	'InfancyEvolution': 'passiveScene',  # EVOL SCENE
+	'InfancyEvolution': 'passiveScene', # EVOL SCENE
 
 	'Scene9': 'passiveScene',
 	'dScene9': 'activeScene',
@@ -42,28 +42,28 @@ scene_types = {
 		'Scene10.3': 'passiveScene',
 	'Scene11': 'passiveScene',
 	'dScene11': 'activeScene',
-		'Scene11.1': 'passiveScene',  # ROOFTOP SCENE
+		'Scene11.1': 'passiveScene',
 			'Scene12': 'passiveScene',
 			'Scene13': 'passiveScene',
 			'Scene14': 'passiveScene',
-			'dScene14': 'activeScene', # POSTER SCENE
+			'dScene14': 'activeScene',
 				'Scene14.1': 'passiveScene',
 				'Scene14.2': 'passiveScene',
 			'Scene15': 'passiveScene',
-			'dScene15': 'activeScene', # BUS STOP SCENE
-				'Scene15.1': 'passiveScene',  # USB
+			'dScene15': 'activeScene',
+				'Scene15.1': 'passiveScene', 
 					'Scene15.1.1': 'passiveScene',
-						'dScene15.1.1': 'activeScene',  # CHECK OR SLEEP
+						'dScene15.1.1': 'activeScene',
 							'Scene15.1.1.1': 'passiveScene',
 							'Scene15.1.1.2': 'passiveScene',
-				'Scene15.2': 'passiveScene',  # COKE
+				'Scene15.2': 'passiveScene',
 					'Scene15.2.1': 'passiveScene',
-						'dScene15.2.1': 'activeScene',  # CHECK OR SLEEP
+						'dScene15.2.1': 'activeScene',
 							'Scene15.2.1.1': 'passiveScene',
 							'Scene15.2.1.2': 'passiveScene',
-				'Scene15.3': 'passiveScene',  # SOUP
+				'Scene15.3': 'passiveScene',
 
-		'Scene11.2': 'passiveScene',  # CAFETERIA SCENE
+		'Scene11.2': 'passiveScene',
 		'Scene16': 'passiveScene',
 		'Scene17': 'passiveScene',
 	'ChildhoodEvolution': 'passiveScene', # EVOL SCENE
@@ -326,7 +326,7 @@ character = {
 		'Scene6.3': 'mom-angry',
 	'Scene7': 'mom-solosigh',
 	'Scene8': '',
-	'InfancyEvolution': '',  # TRANSMOD ASSET
+	'InfancyEvolution': 'levelup1',  # TRANSMOD ASSET
 
 	'Scene9': 'mom-soloangry',
 	'dScene9': 'mom-soloangry',
@@ -344,27 +344,27 @@ character = {
 			'Scene12': 'twice',  # TWICE ALBUM COVER
 			'Scene13': '',
 			'Scene14': '',
-			'dScene14': '',# POSTER ASSET
+			'dScene14': '',
 				'Scene14.1': '',
 				'Scene14.2': '',
 			'Scene15': '',
-			'dScene15': '', #  BUS STOP SCENE
-				'Scene15.1': 'flashdrive', #  USB ASSET
+			'dScene15': '',
+				'Scene15.1': 'flashdrive',
 					'Scene15.1.1': '',
-						'dScene15.1.1': '', # CHECK OR SLEEP
+						'dScene15.1.1': '',
 							'Scene15.1.1.1': 'flashdrive',
 							'Scene15.1.1.2': '',
-				'Scene15.2': 'whitebrick', #  WHITE BRICK ASSET
+				'Scene15.2': 'whitebrick',
 					'Scene15.2.1': '',
-						'dScene15.2.1': '', # CHECK OR SLEEP
+						'dScene15.2.1': '',
 							'Scene15.2.1.1': 'whitebrick',
 							'Scene15.2.1.2': '',
-				'Scene15.3': '', #  SOUP ASSET
+				'Scene15.3': '',
 
-		'Scene11.2': '', #  CAFETERIA SCENE
+		'Scene11.2': '',
 		'Scene16': '',
-		'Scene17': 'piano', # MUSIC BOOK ASSET
-		'ChildhoodEvolution': 'dark_background', # EVOL SCENE
+		'Scene17': 'piano', 
+		'ChildhoodEvolution': 'levelup2', # EVOL SCENE
 
 	'Scene18': '',
 	'Scene19': '',
@@ -385,8 +385,8 @@ character = {
 	'dScene28': '',
 	'Scene29': '',
 	'Scene30': '',
-	'TeenagehoodEvolution1': '',
-	'TeenagehoodEvolution1': '',
+	'TeenagehoodEvolution1': 'levelup3',
+	'TeenagehoodEvolution1': 'levelup3',
 	
 	'Scene31': '',
 	'Scene32': '',
@@ -517,8 +517,6 @@ dialogue = {
 		('devs', 'You close your eyes and get ready'),
 		('devs', 'for the future days to come.'),
 		],
-	
-
 	'Scene9': [
 		('MOM', 'Kid! Wake up!'),
 		('MOM', 'Kid!!!!!!!!!! '),
@@ -927,7 +925,6 @@ dialogue = {
 		],
 	'TeenagehoodEvolCheck': [
 		('', ''),
-
 		],
 
 	}
