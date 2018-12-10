@@ -20,6 +20,7 @@ transparent = (100, 0, 0, 128)
 
 # VARIABLES
 # A tuple of button names, nothing special here, unless we decide to change button graphics
+item_buttons = ('flashdrive_button', 'journal_button', 'levelup1_button', 'levelup2_button', 'levelup3_button', 'piano_button', 'soup_button', 'twice_button', 'whitebrick_button')
 buttons = ('button_blue', 'button_green', 'button_orange')
 start_buttons = ('new_game', 'load_game', 'quit')
 
@@ -50,7 +51,7 @@ scene_types = {
 		'Scene6.3': 'passiveScene',
 	'Scene7': 'passiveScene',
 	'Scene8': 'passiveScene',
-	'InfancyEvolution': 'passiveScene',  # EVOL SCENE
+	'InfancyEvolution': 'passiveScene', # EVOL SCENE
 
 	'Scene9': 'passiveScene',
 	'dScene9': 'activeScene',
@@ -64,34 +65,62 @@ scene_types = {
 		'Scene10.3': 'passiveScene',
 	'Scene11': 'passiveScene',
 	'dScene11': 'activeScene',
-		'Scene11.1': 'passiveScene', #  ROOFTOP SCENE
+		'Scene11.1': 'passiveScene',
 			'Scene12': 'passiveScene',
 			'Scene13': 'passiveScene',
 			'Scene14': 'passiveScene',
-			'dScene14': 'activeScene',# POSTER SCENE
+			'dScene14': 'activeScene',
 				'Scene14.1': 'passiveScene',
 				'Scene14.2': 'passiveScene',
 			'Scene15': 'passiveScene',
-			'dScene15': 'activeScene', #  BUS STOP SCENE
-				'Scene15.1': 'passiveScene', #  USB
+			'dScene15': 'activeScene',
+				'Scene15.1': 'passiveScene', 
 					'Scene15.1.1': 'passiveScene',
-						'dScene15.1.1': 'activeScene', # CHECK OR SLEEP
+						'dScene15.1.1': 'activeScene',
 							'Scene15.1.1.1': 'passiveScene',
 							'Scene15.1.1.2': 'passiveScene',
-				'Scene15.2': 'passiveScene', #  COKE
+				'Scene15.2': 'passiveScene',
 					'Scene15.2.1': 'passiveScene',
-						'dScene15.2.1': 'activeScene', # CHECK OR SLEEP
+						'dScene15.2.1': 'activeScene',
 							'Scene15.2.1.1': 'passiveScene',
 							'Scene15.2.1.2': 'passiveScene',
-				'Scene15.3': 'passiveScene', #  SOUP
+				'Scene15.3': 'passiveScene',
 
-		'Scene11.2': 'passiveScene', #  CAFETERIA SCENE
+		'Scene11.2': 'passiveScene',
 		'Scene16': 'passiveScene',
 		'Scene17': 'passiveScene',
 	'ChildhoodEvolution': 'passiveScene', # EVOL SCENE
 
+	'Scene18': 'passiveScene',
+	'Scene19': 'passiveScene',
+	'Scene20': 'passiveScene',
+	'Scene21': 'passiveScene',
+	'Scene22': 'passiveScene',  # SUICIDE ATTEMPT 1 (from POSTER SCENE)
+	'Scene23': 'passiveScene',
+	'Scene24': 'passiveScene',
+	'Scene25': 'passiveScene',
+	'Scene26': 'passiveScene',
+	'Scene27': 'passiveScene',
+	'dScene27': 'activeScene',
+	'Scene27.1.1': 'passiveScene',
+	'Scene27.1.2': 'passiveScene',
+	'Scene27.1.3': 'passiveScene',
+	'Scene27.1.4': 'passiveScene',
+	'Scene28': 'passiveScene',
+	'dScene28': 'activeScene',
+	'Scene29': 'passiveScene',
+	'Scene30': 'passiveScene',
+	'TeenagehoodEvolution1': 'passiveScene', # EVOL SCENE End 1
+	'TeenagehoodEvolution2': 'passiveScene', # EVOL SCENE End 2
+	'Scene31': 'passiveScene',
+	'Scene32': 'passiveScene',
+	'Scene33': 'passiveScene',
+	'Scene34': 'passiveScene',
+	'Scene35': 'passiveScene',
+	'Scene36': 'passiveScene',
+	'Scene37': 'passiveScene',
 
-
+ 	'Credits': 'passiveScene',
 	'GameOver': 'activeScene',
 	}
 
@@ -108,7 +137,7 @@ nexts = {
 		'Scene1.2': 'Scene2',
 		'Scene1.3': 'GameOver',
 	'Scene2': 'dScene2',
-	'dScene2': ('Scene3', 'Scene2.1', ''),
+	'dScene2': ('Scene3', 'Scene2.1', 'Scene2.1'),
 		'Scene2.1': 'GameOver',
 	'Scene3': 'Scene4',
 	'Scene4': 'Scene5',
@@ -145,12 +174,12 @@ nexts = {
 					'dScene15': ('Scene15.1', 'Scene15.2', 'Scene15.3'), #  BUS STOP SCENE
 						'Scene15.1': 'Scene15.1.1',
 							'Scene15.1.1': 'dScene15.1.1',
-								'dScene15.1.1': ('Scene15.1.1.1', 'Scene15.1.1.2', ''), #  USB
+								'dScene15.1.1': ('Scene15.1.1.1', 'Scene15.1.1.2', 'Scene15.1.1.1'), #  USB
 									'Scene15.1.1.1': 'ChildhoodEvolution',
 									'Scene15.1.1.2': 'ChildhoodEvolution',
 						'Scene15.2': 'Scene15.2.1',
 							'Scene15.2': 'dScene15.2.1',
-								'dScene15.2.1': ('Scene15.2.1.1', 'Scene15.2.1.2', ''), #  coke
+								'dScene15.2.1': ('Scene15.2.1.1', 'Scene15.2.1.2', 'Scene15.2.1.1'), #  coke
 									'Scene15.2.1.1': 'ChildhoodEvolution',
 									'Scene15.2.1.2': 'ChildhoodEvolution',
 						'Scene15.3': 'GameOver', #  SOUP
@@ -159,8 +188,39 @@ nexts = {
 		'Scene16': 'Scene17',
 		'Scene17': 'ChildhoodEvolution',
 
+		'ChildhoodEvolution': 'Scene18',
+		'Scene18': 'Scene19',
+		'Scene19': 'Scene20',
+		'Scene20': 'Scene21',
+		'Scene21': 'Scene22',
+		'Scene22': 'Scene23',
+		'Scene23': 'Scene24',
+		'Scene24': 'GameOver',
+
+		'Scene25': 'Scene26',
+		'Scene26': 'Scene27',
+		'Scene27': 'dScene27',
+		'dScene27': ('Scene27.1.1', 'Scene28', 'Scene28'),
+		'Scene27.1.1': 'Scene27.1.2',
+		'Scene27.1.2': 'Scene27.1.3',
+		'Scene27.1.3': 'Scene27.1.4',
+		'Scene28': 'dScene28',
+		'dScene28': ('Scene29', 'Scene30', 'Scene30'),
+		'Scene29': 'TeenagehoodEvolution1',
+		'Scene30': 'TeenagehoodEvolution2',
+
+		'TeenagehoodEvolution1': 'Scene31',
+		'Scene31': 'Scene23',
+		'Scene32': 'Scene24',
+		'Scene33': 'Credits',
+		'TeenagehoodEvolution2': 'Scene34',
+		'Scene34': 'Scene35',
+		'Scene35': 'Scene36',
+		'Scene36': 'Scene37',
+		'Scene37': 'Credits',
 
 
+	'Credits': '',
 	'GameOver': ('Scene0', '', '')
 	}
 
@@ -231,6 +291,36 @@ scenery = {
 		'Scene17': 'living-dusk',
 	'ChildhoodEvolution': 'dark_background', # EVOL SCENE
 
+	'Scene18': 'bedroom',
+	'Scene19': 'living',
+	'Scene20': 'hospital',
+	'Scene21': 'hospital',
+	'Scene22': 'bedroom-dusk',
+	'Scene23': 'kitchen-day',
+	'Scene24': 'bedroom',
+	'Scene25': 'bedroom',
+	'Scene26': 'kitchen-day',
+	'Scene27': 'school',
+	'dScene27': 'school',
+	'Scene27.1.1': 'classroom',
+	'Scene27.1.2': 'hallway-2',
+	'Scene27.1.3': 'stairway',
+	'Scene27.1.4': 'rooftop',
+	'Scene28': 'school',
+	'dScene28': 'bedroom',
+	'Scene29': 'bedroom-night',
+	'Scene30': 'bedroom-dusk',
+	'TeenagehoodEvolution1': 'dark_background',
+	'TeenagehoodEvolution1': 'dark_background',
+
+	'Scene31': 'bedroom-dusk',
+	'Scene32': 'park',
+	'Scene33': 'kimi',
+
+	'Scene34': 'bedroom',
+	'Scene35': 'living',
+	'Scene36': 'store',
+	'Scene37': 'hospital',
 
 	'GameOver': 'dark_background',
 	}
@@ -259,7 +349,7 @@ character = {
 		'Scene6.3': 'mom-angry',
 	'Scene7': 'mom-solosigh',
 	'Scene8': '',
-	'InfancyEvolution': '',  # TRANSMOD ASSET
+	'InfancyEvolution': 'levelup1',  # TRANSMOD ASSET
 
 	'Scene9': 'mom-soloangry',
 	'dScene9': 'mom-soloangry',
@@ -274,32 +364,63 @@ character = {
 	'Scene11': '',
 	'dScene11': '',
 		'Scene11.1': '',
-			'Scene12': '',  # TWICE ALBUM COVER
+			'Scene12': 'twice',  # TWICE ALBUM COVER
 			'Scene13': '',
 			'Scene14': '',
-			'dScene14': '',# POSTER ASSET
+			'dScene14': '',
 				'Scene14.1': '',
 				'Scene14.2': '',
 			'Scene15': '',
-			'dScene15': '', #  BUS STOP SCENE
-				'Scene15.1': '', #  USB ASSET
+			'dScene15': '',
+				'Scene15.1': 'flashdrive',
 					'Scene15.1.1': '',
-						'dScene15.1.1': '', # CHECK OR SLEEP
-							'Scene15.1.1.1': '',
+						'dScene15.1.1': '',
+							'Scene15.1.1.1': 'flashdrive',
 							'Scene15.1.1.2': '',
-				'Scene15.2': 'bedroom-dusk', #  WHITE BRICK ASSET
-					'Scene15.2.1': 'bedroom-dusk',
-						'dScene15.2.1': 'bedroom-dusk', # CHECK OR SLEEP
-							'Scene15.2.1.1': 'bedroom-night',
-							'Scene15.2.1.2': 'bedroom-night',
-				'Scene15.3': 'dark_background', #  SOUP ASSET
+				'Scene15.2': 'whitebrick',
+					'Scene15.2.1': '',
+						'dScene15.2.1': '',
+							'Scene15.2.1.1': 'whitebrick',
+							'Scene15.2.1.2': '',
+				'Scene15.3': '',
 
-		'Scene11.2': 'classroom', #  CAFETERIA SCENE
-		'Scene16': 'cafeteria',
-		'Scene17': 'living-dusk', # MUSIC BOOK ASSET
-		'ChildhoodEvolution': 'dark_background', # EVOL SCENE
+		'Scene11.2': '',
+		'Scene16': '',
+		'Scene17': 'piano', 
+		'ChildhoodEvolution': 'levelup2', # EVOL SCENE
 
+	'Scene18': '',
+	'Scene19': '',
+	'Scene20': 'doctor',
+	'Scene21': 'mom-solosigh',
+	'Scene22': '',
+	'Scene23': 'mom-solosigh',
+	'Scene24': '',
+	'Scene25': 'mom-solofinger',
+	'Scene26': 'mom-solofinger',
+	'Scene27': '',
+	'dScene27': 'journal',
+	'Scene27.1.1': '',
+	'Scene27.1.2': '',
+	'Scene27.1.3': '',
+	'Scene27.1.4': '',
+	'Scene28': '',
+	'dScene28': '',
+	'Scene29': '',
+	'Scene30': '',
+	'TeenagehoodEvolution1': 'levelup3',
+	'TeenagehoodEvolution1': 'levelup3',
+	
+	'Scene31': '',
+	'Scene32': '',
+	'Scene33': 'dad',
 
+	'Scene34': '',
+	'Scene35': 'granny',
+	'Scene36': '',
+	'Scene37': 'doctor',
+
+	'Credits': '',
 	'GameOver': '',
 	}
 
@@ -318,73 +439,74 @@ dialogue = {
 		('SELF', 'But ... but first who am I?')
 		], 
 	'Scene1': [
-		('devs', '*some sort of special scene here*'),
+		('devs', 'Please enter your name here:'),
 		('devs', 'haven\'t coded it yet'),
-		('devs', 'should be an enter name prompt'),
-		('', 'Oof.'),
+		('devs', 'should be an enter name prompt.'),
+		('devs', 'Oof. Game devs suck.'),
+		('devs', 'From now on, your name\'s Kid.'),
+		('devs', 'Deal with it.'),
 		('SELF', 'I still don’t know where I am...'),
 		('SELF', 'But it seems like I\'m inside a cave.'),
 		('SELF', 'There must be a way out...'),
 		], 
 	'Scene1.1': [
-		('', 'It’s as if you’re inside an elastic cage...'),
-		('', 'Wait, what’s that? You hear a muffled voice...'),
-		('???', 'I\'m going to see you real soon, Kid'),
-		('', 'For some reason, you remember the voice'),
+		('devs', 'It’s as if you’re inside an elastic cage...'),
+		('devs', 'Wait, what’s that? You hear a muffled voice...'),
+		('???', 'I\'m going to see you real soon, Kid.'),
+		('devs', 'For some reason, you remember the voice'),
 		('SELF', 'Man, that was tiring. Let me just sleep.'),
 		],
 	'Scene1.2': [
-		('', 'You tried to feel but the surroundings'),
-		('', 'don’t have the same feelings for you.'),
-		('', 'This is so sad.'),
-		('', 'Alexa might know what to do.'),
+		('devs', 'You tried to feel but the surroundings'),
+		('devs', 'don’t have the same feelings for you.'),
+		('devs', 'This is so sad.'),
+		('devs', 'Alexa might know what to do.'),
 		],
 	'Scene1.3': [
-		('', 'As you shadow boxed around the area,'), 
-		('', 'you became more aware of your surroundings.'),
-		('', 'It seems like you’re trapped'),
-		('', 'in some kind of elastic cage...'),
-		('', 'Just outside the cave,'),
-		('', 'you hear somebody moan...'),
+		('devs', 'As you shadow boxed around the area,'), 
+		('devs', 'you became more aware of your surroundings.'),
+		('devs', 'It seems like you’re trapped'),
+		('devs', 'in some kind of elastic cage...'),
+		('devs', 'Just outside the cave,'),
+		('devs', 'you hear somebody moan...'),
 		('???', 'Ugh, that hurts... fuck!'),
-		('', 'For some reason, you died.'),
-		('', 'We won’t tell you how though.'),
-		('', 'Next time, don’t be a small brain.'),
+		('devs', 'For some reason, you died.'),
+		('devs', 'We won’t tell you how though.'),
+		('devs', 'Next time, don’t be a small brain.'),
 		],
 	'Scene2': [
-		('', 'Suddenly, a flash of light appears.'), 
-		('', 'You see a hole.'),
+		('devs', 'Suddenly, a flash of light appears.'), 
+		('devs', 'You see a hole.'),
 		('SELF', 'It must be the exit!'),
 		('SELF', 'But should I really go that way?'),
 		],
 	'Scene2.1': [
-		('', 'For some reason, you died.'), 
-		('', 'You’ll never know what’s on the other side.'),
-		('', 'You’ll get it next time buddy.'),
+		('devs', 'For some reason, you died.'), 
+		('devs', 'You’ll never know what’s on the other side.'),
+		('devs', 'You’ll get it next time buddy.'),
 		],
 	'Scene3': [
-		('', 'As you were nearing the blinding light,'),
-		('', 'you finally realized what was happening.'),
-		('', 'You’re a baby!'),
-		('', 'What do you think your gender should be?'),
+		('devs', 'As you were nearing the blinding light,'),
+		('devs', 'you finally realized what was happening.'),
+		('devs', 'You’re a baby!'),
+		('devs', 'What do you think your gender should be?'),
 		('devs', 'Sike!'),
 		('devs', 'We already assumed your gender, sorry.'),
 		('SELF', 'Isn\'t that kind of sexist...'),
 		('devs', 'Fly away you little shit.'),
 		('devs', 'By the way, good luck dealing with your mom.'),
-		('', ''),
 		],
 	'Scene4': [
 		('DOCTOR', 'Congratulations, Ma\'am, it was successful'),
 		('DOCTOR', 'and it’s a baby boy!'),
 		('DOCTOR', 'Good luck on your motherhood.'),
-		('', 'As the screen fades to black,'),
-		('', 'you see that devilish smile of hers.'),
-		('', 'But she doesn’t know what’s coming.'),
-		('', 'Good luck to her indeed.'),
+		('devs', 'Just before you "evolve",'),
+		('devs', 'you see that devilish smile of hers.'),
+		('devs', 'But she doesn’t know what’s coming.'),
+		('devs', 'Good luck to her indeed.'),
 		],
 	'Scene5': [
-		('', 'After two months...'),
+		('devs', 'After two months...'),
 		],
 	'Scene6': [
 		('SELF', 'It’s been two months and this old woman'),
@@ -392,7 +514,7 @@ dialogue = {
 		('SELF', 'She wants stupid? Show her stupid.'),
 		],
 	'Scene6.1': [
-		('', '(+1 XP) Good thing you learned how to cry!'),
+		('devs', 'Good thing you learned how to cry! (+1 XP)'),
 		('MOM', 'Awww, don’t cry Kid.'),
 		('MOM', 'You know you’re so cute when you cry.'),
 		('SELF', 'Oh come on! How is that cute?'),
@@ -415,16 +537,10 @@ dialogue = {
 		('MOM', 'Time to go to bed, Kid.'),
 		],
 	'Scene8': [
-		('', 'As the night deepens, your mom falls asleep'),
-		('', 'while caressing you.'),
-		('', 'You close your eyes and get ready'),
-		('', 'for the future days to come.'),
-		],
-	'InfancyEvolution': [
-		('', ''),
-		('', ''),
-		('', ''),
-		('', ''),
+		('devs', 'As the night deepens, your mom falls asleep'),
+		('devs', 'while caressing you.'),
+		('devs', 'You close your eyes and get ready'),
+		('devs', 'for the future days to come.'),
 		],
 	'Scene9': [
 		('MOM', 'Kid! Wake up!'),
@@ -438,13 +554,13 @@ dialogue = {
 		('SELF', 'That’s illegal.'),
 		],
 	'Scene9.1': [
-		('', 'And that was the last time you fell asleep.'),
+		('devs', 'And that was the last time you fell asleep.'),
 		],
 	'Scene9.2': [
-		('', '(+20 life exp) You’ve grown up really good.'),
+		('devs', '(+20 life exp) You’ve grown up really good.'),
 		],
 	'Scene9.3': [
-		('', '(+15 life experience) for being awesome.'),
+		('devs', '(+15 life experience) for being awesome.'),
 		],
 	'Scene10': [
 		('MOM', 'Here\'s breakfast. Sit down and eat.'),
@@ -457,7 +573,7 @@ dialogue = {
 	'Scene10.1': [
 		('SELF', 'Sorry Mom, I was just spacing out is all'),
 		('MOM', 'Okay, hurry up the bus is here.'),
-		('', 'You earned +10 life xp'),
+		('devs', 'You earned +10 life xp'),
 		],
 	'Scene10.2': [
 		('SELF', 'Oh the bus is here, I gotta go Mom sorry.'),
@@ -469,10 +585,10 @@ dialogue = {
 		('SELF', 'Your cooking tastes bad Mom'),
 		('MOM', 'Why you ungrateful little shit!!!'),
 		('MOM', 'Get out before I strike you with a broom'),
-		('', 'You get out of the house immediately'),
+		('devs', 'You get out of the house immediately'),
 		],
 	'Scene11': [
-		('', 'After 30 minutes in the classroom...'),
+		('devs', 'After 30 minutes in the classroom...'),
 		('SELF', 'Man, our teacher is probably absent again.'),
 		('SELF', 'I’m so tired of this. I\'m out'),
 		('SELF', 'but where should I go though?'),
@@ -481,57 +597,58 @@ dialogue = {
 		('SELF', 'I should just chill at the rooftop for a bit'),
 		],
 	'Scene12': [
-		('', 'While going up the stairs you found something'),
+		('devs', 'While going up the stairs you found something'),
 		('SELF', 'What’s this? A TWICE... Album?'),
-		('', 'TWICE album added to inventory.'),
+		('devs', 'TWICE album added to inventory.'),
 		('SELF', 'They look cute,'),
 		('SELF', 'I should probably keep this for later.'),
-		('', 'You earned +15 life exp.'),
+		('devs', 'You earned +15 life exp.'),
 		],
 	'Scene13': [
 		('SELF', 'Ahh, it’s always relaxing here.'),
 		('SELF', 'I’m gonna take a short nap.'),
-		('', 'After a few hours...'),
+		('devs', 'After a few hours...'),
 		('SELF', 'Wow I think I overslept.'),
-		('', 'You check your phone to discover'),
-		('', 'that you have 6 missed calls from Mom'),
+		('devs', 'You check your phone to discover'),
+		('devs', 'that you have 6 missed calls from Mom'),
 		('SELF', 'Crap, Mom’s gonna kill me.'),
 		('SELF', 'I better get home ASAP.'),
 		],
 	'Scene14': [
-		('', 'While running through the hallway,'),
-		('', 'you notice some commotion going on outside'),
-		('', 'Apparently, someone  jumped off the building'),
+		('devs', 'While running through the hallway,'),
+		('devs', 'you notice some commotion going on outside'),
+		('devs', 'Apparently, someone  jumped off the building'),
 		('SELF', 'What’s with people these days,'),
 		('SELF', 'doing all sorts of stupid things'),
-		('', 'You shrug it off as you see someone'),
-		('', 'crying while looking up at a poster,'),
-		('', 'but you are in a hurry.'),
-		('', 'Do you decide to stop and look at it'),
-		('', 'or continue running?'),
+		('devs', 'You shrug it off as you see someone'),
+		('devsdevs', 'crying while looking up at a poster,'),
+		('devs', 'but you are in a hurry.'),
+		('devs', 'Do you decide to stop and look at it'),
+		('devs', 'or continue running?'),
 		],
 	'Scene14.1': [
 		('SELF', 'It should only take a sec.'),
 		('SELF', '"Psalm 23:4"'),
-		('', 'You read the poster and earn +20 XP.'),
+		('devs', 'You read the poster and earn +20 XP.'),
 		],
 	'Scene14.2': [
-		('', 'You continue on outside the school'),
+		('devs', 'You continue on outside the school'),
 		],
 	'Scene15': [
-		('', 'While waiting for a bus,'),
-		('', 'you noticed a parcel beside you.'),
-		('', 'You looked inside the parcel and you saw'),
-		('', 'a flash drive, a white brick, and soup'),
-		('', 'You only have space for one of these.'),
-		('', 'Which will you take?'),
+		('devs', 'While waiting for a bus,'),
+		('devs', 'you noticed a parcel beside you.'),
+		('devs', 'You looked inside the parcel and you saw'),
+		('devs', 'a flash drive, a white brick, and soup'),
+		('devs', 'You only have space for one of these.'),
+		('devs', 'Which will you take?'),
 		],
 	'Scene15.1': [
-		('', 'The bus arrives, and you get in and go home'),
+		('devs', 'The bus arrives, and you get in and go home'),
+		('devs', 'FLASH DRIVE added to inventory.'),
 		],
 	'Scene15.1.1': [
-		('', 'After a long day, you decide to hit the hay'),
-		('', 'However, this night was a unique one.'),
+		('devs', 'After a long day, you decide to hit the hay'),
+		('devs', 'However, this night was a unique one.'),
 		('SELF', 'I feel kind of weird.'),
 		('SELF', 'You can’t really sleep,'),
 		('SELF', 'what should you do?'),
@@ -539,90 +656,299 @@ dialogue = {
 	'Scene15.1.1.1': [
 		('SELF', 'I should probably check'),
 		('SELF', 'what was in that flash drive.'),
-		('', 'You see three items.'),
+		('devs', 'You see three items.'),
 		('SELF', 'A Bayesian-based email spam filter?'),
 		('SELF', 'What the hell is this?'),
-		('', '+15 XP'),
+		('devs', '+15 XP'),
 		('SELF', 'A DotA 2 game folder?'),
 		('SELF', 'I should give this a try sometime...'),
-		('', '+15 XP'),
+		('devs', '+15 XP'),
 		('SELF', 'Hmm, Tito Badang.mp4...'),
-		('', 'Plays TitoBadang.mp4'),
-		('', '+60 XP'),
+		('devs', 'Plays TitoBadang.mp4'),
+		('devs', '+60 XP'),
 		('SELF', 'Oh shit it\'s late, I gotta sleep.'),
 		],
 	'Scene15.1.1.2': [
 		('SELF', 'Oh well, whatever.'),
-		('', 'You force yourself asleep.'),
+		('devs', 'You force yourself asleep.'),
 		],
 	'Scene15.2': [
-		('', 'The bus arrives, and you get in and go home'),
+		('devs', 'The bus arrives, and you get in and go home'),
+		('devs', 'WHITE BRICK added to inventory.'),
 		],
 	'Scene15.2.1': [
-		('', 'After a long day, you decide to hit the hay'),
-		('', 'However, this night was a unique one.'),
+		('devs', 'After a long day, you decide to hit the hay'),
+		('devs', 'However, this night was a unique one.'),
 		('SELF', 'I feel kind of weird.'),
 		('SELF', 'You can’t really sleep,'),
 		('SELF', 'what should you do?'),
 		],
 	'Scene15.2.1.1': [
 		('SELF', 'I’ll check out that white brick.'),
-		('', 'Upon inspection, you see that it has'),
-		('', 'something written on it'),
-		('', '“BlueAxis’s Coke'),
-		('', 'You open the bag and smell it'),
-		('', 'You realize you sniffed some cocaine'),
-		('', 'You become high as fuck'),
-		('', '+90 XP'),
+		('devs', 'Upon inspection, you see that it has'),
+		('devs', 'something written on it'),
+		('devs', '“BlueAxis’s Coke'),
+		('devs', 'You open the bag and smell it'),
+		('devs', 'You realize you sniffed some cocaine'),
+		('devs', 'You become high as fuck'),
+		('devs', '+90 XP'),
 		('SELF', 'You get so high, you pass out.'),
 		],
 	'Scene15.2.1.2': [
 		('SELF', 'Oh well, whatever.'),
-		('', 'You force yourself asleep.'),
-		('', ''),
-		('', ''),
+		('devs', 'You force yourself asleep.'),
 		],
 	'Scene15.3': [
-		('', 'You devour the soup, but suddenly'),
-		('', 'Your stomach starts to growl insanely'),
-		('', 'You pass out. RIP.'),
+		('devs', 'You devour the soup, but suddenly'),
+		('devs', 'Your stomach starts to growl insanely'),
+		('devs', 'You pass out. RIP.'),
 		],
 	'Scene11.2': [
-		('', 'I’ll probably grab some food'),
-		('', 'at the cafeteria and head home.'),
-		('', ''),
-		('', ''),
+		('devs', 'I’ll probably grab some food'),
+		('devs', 'at the cafeteria and head home.'),
 		],
 	'Scene16': [
-		('', 'You were eating your usual food combo,'),
-		('', 'pancit canton with 3 pcs of tofu'),
+		('devs', 'You were eating your usual food combo,'),
+		('devs', 'pancit canton with 3 pcs of tofu'),
 		('SELF', 'I really love this.'),
 		('SELF', 'I’ve been eating this ever since'),
 		('SELF', 'and I never got tired of it.'),
 		('SELF', 'Itadakimasu!'),
-		('', 'While you were busy enjoying your food,'),
-		('', 'you weren’t able to notice your mom'),
-		('', 'calling you through the phone.'),
+		('devs', 'While you were busy enjoying your food,'),
+		('devs', 'you weren’t able to notice your mom'),
+		('devs', 'calling you through the phone.'),
 		('SELF', 'Shit, mom called. I better go home.'),
 		],
 	'Scene17': [
-		('', 'You get home and go straight to your room.'),
-		('', 'But you notice an pianobook on the floor.'),
-		('', 'You pick it up and out of nowhere'),
-		('', 'you know how to play the piano.'),
+		('devs', 'You get home and go straight to your room.'),
+		('devs', 'But you notice an pianobook on the floor.'),
+		('devs', 'You pick it up and out of nowhere'),
+		('devs', 'you know how to play the piano.'),
 		('devs', 'Amazing, right?'),
-		('', 'You head to your room to sleep.'),
+		('devs', 'You head to your room to sleep.'),
 		],
-	'ChildhoodEvolution': [
+	'Scene18': [
+		('devs', 'You wake up, and notice you have increased'),
+		('devs', 'height and mature appearance'),
+		('SELF', 'Nani tf, so desu nEEEEE?'),
+		('devs', 'Stfu bitch.'),
+		('devs', 'As if you were programmed,'),
+		('devs', 'you act as if you had'),
+		('devs', 'not transformed overnight'),
+		('SELF', 'I’m all set.'),
+		('SELF', 'Time to go down and get ready for school'),
 		('', ''),
-		('', ''),
-		('', ''),
+		],
+	'Scene19': [
+		('', 'Upon reaching the kitchen,'),
+		('', 'you feel a grumbling pain'),
+		('SELF', 'Arghhh!'),
+		('', 'You collapse to the floor'),
+		],
+	'Scene20': [
+		('devs', 'The next thing you knew,'),
+		('devs', 'you woke up at a hospital'),
+		('devs', 'You were face to face with the doctor'),
+		('DOC', 'Kid.. I have something to tell you.'),
+		('DOC', 'You have cancer.'),
+		('DOC', 'Remember all those pancit cantons?'),
+		('DOC', 'Yeah, that gave you cancer.'),
+		],
+	'Scene21': [
+		('MOM', 'Wtf, Kid...'),
+		('devs', 'Your mom is shocked in disbelief'),
+		('devs', 'You both head home right after'),
+		],
+	'Scene22': [
+		('devs', 'Your mind bursts with regret.'),
+		('devs', 'Your thoughts are racing'),
+		('SELF', 'Why did it have to come to this?'),
+		('SELF', 'You spiral to a state of confusion,'),
+		('SELF', 'anxiety, and eventually depression'),
+		('SELF', 'This was all new to you,'),
+		('SELF', 'and the emotional pain'),
+		('SELF', 'proved too much to bear'),
+		('SELF', 'Why did it have to be me?'),
+		],
+	'Scene23': [
+		('devs', 'During the morning, Mom was'),
+		('devs', 'waiting for you to come'),
+		('devs', 'down for breakfast,'),
+		('MOM', 'I wonder what this child is up to'),
+		],
+	'Scene24': [
+		('devs', 'Upon opening the door, she sees'),
+		('devs', 'your lifeless body dangling'),
+		('devs', 'from the ceiling fan. RIP'),
+		],
+	'Scene25': [
+		('devs', 'Upon opening the door, she sees'),
+		('devs', 'you fast asleep on your bed.'),
+		('MOM', 'Kid, wake up!'),
+		('MOM', 'I prepared breakfast for you. '),
+		('SELF', ' Oh, I’m sorry mom.'),
+		('SELF', 'I’ll be down right away.'),
+		('devs', 'Despite being diagnosed with cancer,'),
+		('devs', 'you still decide to go'),
+		('devs', 'to school like any normal day.'),
+		],
+	'Scene26': [
+		('devs', 'Mom, I’m going to school.'),
+		('devs', 'See you later.'),
+		('MOM', 'Oh, wait! I haven’t given your lunch ye-'),
+		('MOM', '(He seems weird today. I wonder why.)'),
+		],
+	'Scene27': [
+		('devs', 'When you arrive to school,'),
+		('devs', 'you were surprised to find'),
+		('devs', 'a scientific journal on the ground'),
+		('devs', 'You decide to pick it up'),
+		('SELF', 'Hmm, this seems interesting...'),
+		],
+	'Scene27.1.1': [
+		('SELF', 'Ugh, he’s absent again...'),
+		('SELF', 'Is this teacher for real?!'),
+		('SELF', 'Well, I sure wasted my time here.'),
+		('SELF', 'I’m just gonna head to my usual spot.'),
+		('devs', 'You go out of the classroom'),
+		('devs', 'and head to the rooftop'),
+		],
+	'Scene27.1.2': [
+		('devs', 'While crossing the hallway, you see a'),
+		('devs', 'bouquet of flowers and candles.'),
+		('devs', 'Right at the spot where someone'),
+		('devs', 'landed when they jumped.'),
+		('SELF', 'I wonder why he did that.'),
+		('devs', 'You just shrug it off and'),
+		('devs', 'continue to walk off your way.'),
+		],
+	'Scene27.1.3': [
+		('devs', 'While walking up the staircase,'),
+		('devs', 'you feel a strange chill'),
+		('devs', 'Suddenly, you hear a whisper'),
+		('???', '“I will not be the last”'),
+		('devs', 'Suddenly, you lose control of your body'),
+		('devs', 'as if something had possessed you '),
+		('devs', 'You walk towards the rooftop'),
+		],
+	'Scene27.1.4': [
+		('devs', 'Your heart was filled with despair.'),
+		('devs', 'You hear voices in your head.'),
+		('???', '“Your mom doesn’t love you”'),
+		('???', '“You will never know your Father”'),
+		('???', '“You’re alone”'),
+		('devs', 'As if you were a puppet,'),
+		('devs', 'you found yourself standing'),
+		('devs', 'on the ledge of the rooftop'),
+		('???', '"Take the leap and join me"'),
+		('devs', 'You jumped off the building, you died.'),
+		],
+	'Scene28': [
+		('SELF', 'Hmm, I better bring this home'),
+		],
+	'Scene29': [
+		('devs', 'You decide to spend the remaining'),
+		('devs', 'hours of the day playing DotA'),
+		('SELF', 'You wasted the day but, hey,'),
+		('SELF', 'at least you got that +25 MMR'),
+		('SELF', 'You earned +10 life exp'),
+		],
+	'Scene30': [
+		('devs', 'Ahh shit, I almost forgot.'),
+		('devs', 'We have exams tomorrow.'),
+		('SELF', 'I better study.'),
+		('SELF', 'You study for your exams.'),
+		('SELF', 'Your mom would be proud.'),
+		('SELF', 'You earned +20 life exp'),
+		],
+	'Scene31': [
+		('SELF', 'Let me take a look at this...'),
+		('SELF', 'You open the scientific journal and'),
+		('devs', 'read through its contents'),
+		('devs', 'You then stumble upon a'),
+		('devs', ' research made by Dr. Saucy'),
+		('devs', 'Apparently, it was discovered that'),
+		('devs', 'mangos can cure cancer!'),
+		('SELF', 'Well shit. I better go find'),
+		('devs', 'You set out to go to the Park'),
+		('devs', 'to find some mango stalls'),
+		],
+	'Scene32': [
+		('devs', 'You find a vendor selling a '),
+		('devs', 'beverage called ‘Mango Graham”'),
+		('SELF', 'This looks tasty, I’ll try it.'),
+		('devs', 'You bought a Mango Graham'),
+		('devs', 'and enjoyed drinking it'),
+		('devs', 'While you were drinking, you'),
+		('devs', 'overhear a familiar voice.'),
+		('SELF', 'That voice sounds...'),
+		('SELF', 'Could it be... No it can\'t be.'),
+		('devs', 'The voice was starting to leave'),
+		('SELF', 'Wait!!!'),
+		('devs', 'You rush off to follow the voice.'),
+		],
+	'Scene33': [
+		('devs', 'You finally catch up to the guy'),
+		('devs', 'Hey!'),
+		('SELF', 'Wait aren’t you…'),
+		('devs', 'Kid! I’m Kid!'),
+		('devs', 'Are you m-my...'),
+		('devs', 'Why yes Kid.'),
+		('devs', 'I am your Father.'),
+		('SELF', 'Your mom is...'),
+		],
+	'Scene34': [
+		('devs', 'After that horrendous decision of'),
+		('devs', 'playing DotA instead of studying'),
+		('devs', 'you flunked out of high school and'),
+		('devs', 'got a job as a convenience store clerk.'),
+		('devs', ''),
+		],
+	'Scene35': [
+		('SELF', 'I\'m heading out to work, Mom.'),
+		('MOM', 'Alright, I\'ll see you when you'),
+		('MOM', 'get home, okay?'),
+		('SELF', 'Yes, mom.'),
+		],
+	'Scene36': [
+		('SELF', 'Agh, another day at work.'),
+		('SELF', 'When is this gonna end...'),
+		('SELF', 'I just need enough money t-'),
+		('PHONE', '*RING RING*'),
+		('SELF', 'Hello, welcome to Chili\'s'),
+		('SELF', 'What can I do f-'),
+		('SELF', 'Ok, ok.'),
+		('SELF', 'Yes.'),
+		('SELF', 'I\'ll be right there.'),
+		],
+	'Scene37': [
+		('DOC', 'Hello, kid...'),
+		('DOC', 'I\'m sorry to say this but...'),
+		('DOC', 'Your mom is...'),
 		('', ''),
 		],
 	'InfancyEvolution': [
+		('devs', 'You are now entering Childhood'),
+		('devs', ''),
+
+		],
+	'InfancyEvolCheck': [
 		('', ''),
+
+		],
+	'ChildhoodEvolution': [
+		('', 'You are now entering TeenageHood'),
 		('', ''),
+
+		],
+	'ChildEvolCheck': [
 		('', ''),
+
+		],
+	'TeenagehoodEvolution': [
+		('devs', 'You are now entering Adulthood'),
+		],
+	'TeenagehoodEvolCheck': [
 		('', ''),
 		],
 
@@ -633,17 +959,16 @@ dialogue = {
 # Tuple's format is (choice1, choice2, choice3) from top to bottom
 choice_texts = {
 	'dScene1': ('Move aggresively', 'Feel surroundings', 'Go apeshit'),
-	'dScene2': ('Yes', 'No', '-'),
-	'dScene6': ('Cry Scene6.1', 'Puke Scene6.2', 'Shit Scene6.3'),
+	'dScene2': ('Yes', 'No', 'Let devs choose'),
+	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'),
 	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'),
 	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'),
 	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', ''),
-	'dScene14': ('Look', 'Ignore', ''),
+	'dScene14': ('Look', 'Ignore', 'Let devs choose'),
 	'dScene15': ('Flash drive', 'White brick', 'Soup'),
-	'dScene15.1.1': ('Check flash drive', 'Sleep', ''),
-	'dScene15.2.1': ('Check white brick', 'Ignore', ''),
+	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
 
-	'GameOver': ('Back to start', '', ''),
+	'GameOver': ('Start over', '', ''),
 	 }
 
 # A list of previous the previous scenes, the last element is the latest scene
@@ -833,16 +1158,16 @@ class Screen:
 	def button(self):
 		Button(1205, 50, 'menu', god_menu, 'buttons/', 50, 50).simple()
 		#Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
-		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 3*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 4*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 5*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 6*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 7*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 8*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x, self.item_pos_y, item_buttons[0], item_use).simple()
+		Button(self.item_pos_x + self.item_offset, self.item_pos_y, item_buttons[1], item_use).simple()
+		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, item_buttons[2], item_use).simple()
+		Button(self.item_pos_x + 3*self.item_offset, self.item_pos_y, item_buttons[3], item_use).simple()
+		Button(self.item_pos_x + 4*self.item_offset, self.item_pos_y, item_buttons[4], item_use).simple()
+		Button(self.item_pos_x + 5*self.item_offset, self.item_pos_y, item_buttons[5], item_use).simple()
+		Button(self.item_pos_x + 6*self.item_offset, self.item_pos_y, item_buttons[6], item_use).simple()
+		Button(self.item_pos_x + 7*self.item_offset, self.item_pos_y, item_buttons[7], item_use).simple()
+		Button(self.item_pos_x + 8*self.item_offset, self.item_pos_y, item_buttons[8], item_use).simple()
+		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, 'button_green', item_use).simple()
 
 	def menu_buttons(self):
 
@@ -885,7 +1210,7 @@ class passiveScene(Screen):
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
 						quit()
-				if event.type == pygame.QUIT:
+				elif event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
 				elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -899,11 +1224,12 @@ class passiveScene(Screen):
 						if self.line == len(dialogue.get(self.scene_name)):
 							self.next_type(self.next_scene).execute()
 						self.scene_done = False
+				#pygame.display.update()
 			self.speaker_name, self.text_list = dialogue.get(self.scene_name)[self.line]
 			Screen.button(self)
 			pygame.display.update()
 			if not self.scene_done:
-				Screen.button(self)
+				#Screen.button(self)
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
@@ -919,10 +1245,12 @@ class passiveScene(Screen):
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).passive_panel()
+				#Screen.button(self)
 				self.scene_done = True
+				pygame.display.update()
 				continue
 			pygame.display.update()
-			clock.tick(90)
+			clock.tick(60)
 
 class activeScene(Screen):
 
@@ -939,6 +1267,7 @@ class activeScene(Screen):
 		self.start_pos_x = 535
 		self.start_pos_y = 470
 		self.start_offset_y = 70
+		self.color = white
 
 	def game_start(self):
 
