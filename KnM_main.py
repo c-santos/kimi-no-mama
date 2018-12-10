@@ -823,16 +823,15 @@ class Screen:
 		self.color_speaker = gray
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
-		self.item_pos_x = 50
-		self.item_pos_y = 50
-		self.item_offset = 75
+		self.item_pos_x = 80
+		self.item_pos_y = 95
+		self.item_offset = 70
 		self.speaker_font = 'RobotoMono-Italic'
 		self.dialog_box = 'dialog_panel'
 
 	def button(self):
-		Button(1205, 50, 'menu', activeScene().main_menu, 'buttons/', 50, 50).simple()
-		Button(1010, 50, 'items', store_func, 'buttons/', 175, 50).simple()
-		Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
+		Button(1205, 50, 'menu', god_menu, 'buttons/', 50, 50).simple()
+		#Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
 		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
@@ -846,9 +845,9 @@ class Screen:
 
 	def menu_buttons(self):
 
-		Button(551, 210, 'save', store_func, 'buttons/', 189, 48).simple()
-		Button(551, 280, 'load', store_func, 'buttons/', 189, 48).simple()
-		Button(551, 350, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
+		Button(551, 240, 'load-save', save_func, 'buttons/', 189, 48).simple()
+		#Button(551, 280, 'load', save_func, 'buttons/', 189, 48).simple()
+		Button(551, 320, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
 
 	def save_buttons(self):
 		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
@@ -861,8 +860,6 @@ class Screen:
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
 		Button(self.item_pos_x, self.item_pos_y + 3*self.item_offset, buttons[1], item_use).simple()
-
-
 
 class passiveScene(Screen):
 
@@ -881,6 +878,7 @@ class passiveScene(Screen):
 		if self.speaker:
 			renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+		renderImage('inventory', 'buttons/', 50, 75).midleft()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
@@ -896,6 +894,7 @@ class passiveScene(Screen):
 						if self.speaker:
 							renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 						renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+						renderImage('inventory', 'buttons/', 50, 75).midleft()
 						self.line += 1
 						if self.line == len(dialogue.get(self.scene_name)):
 							self.next_type(self.next_scene).execute()
@@ -904,7 +903,9 @@ class passiveScene(Screen):
 			Screen.button(self)
 			pygame.display.update()
 			if not self.scene_done:
+				Screen.button(self)
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+				displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 				self.scene_done = True
 				continue
@@ -914,7 +915,9 @@ class passiveScene(Screen):
 				if self.speaker:
 					renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
 				renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+				renderImage('inventory', 'buttons/', 50, 75).midleft()
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+				displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).passive_panel()
 				self.scene_done = True
 				continue
@@ -986,17 +989,22 @@ class activeScene(Screen):
 		pygame.mixer.music.load('H1.mp3')
 		pygame.mixer.music.play(-1)
 		renderImage(self.background, 'scenery/').center()
+		renderImage('inventory', 'buttons/', 50, 75).midleft()
 		Screen.button(self)
+
 		if self.speaker:
 			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
 		if self.oddity:
 			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
 		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+		renderImage('inventory', 'buttons/', 50, 75).midleft()
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+		displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivemidleft()
 		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivemidleft()
 		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivemidleft()
+
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
@@ -1041,6 +1049,10 @@ def item_use():
 def save_func():
 
 	activeScene().save_slots()
+
+def god_menu():
+
+	activeScene().main_menu()
 
 def save():
 
