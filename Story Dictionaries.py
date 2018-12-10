@@ -155,7 +155,7 @@ nexts = {
 									'Scene15.1.1.1': 'ChildhoodEvolution',
 									'Scene15.1.1.2': 'ChildhoodEvolution',
 						'Scene15.2': 'Scene15.2.1',
-							'Scene15.2': 'dScene15.2.1',
+							'Scene15.2.1': 'dScene15.2.1',
 								'dScene15.2.1': ('Scene15.2.1.1', 'Scene15.2.1.2', 'Scene15.2.1.1'), #  coke
 									'Scene15.2.1.1': 'ChildhoodEvolution',
 									'Scene15.2.1.2': 'ChildhoodEvolution',
