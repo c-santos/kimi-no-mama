@@ -724,8 +724,10 @@ class displayText:
 
 		string = ''
 		fontography = pygame.font.Font(self.font, self.size)
-		#pygame.mixer.music.load('pop.mp3')
-		#pygame.mixer.music.play()
+		#a = pygame.mixer.Sound('pop.mp3')
+		#b = pygame.mixer.Sound('H1.mp3')
+		#a.play()
+		#b.play()
 		for character in self.text_list:
 			pygame.event.clear()
 			pygame.time.wait(40)
@@ -825,7 +827,7 @@ class Screen:
 		self.dialog_box = 'dialog_panel'
 
 	def button(self):
-		Button(1205, 50, 'menu', menu, 'buttons/', 50, 50).simple()
+		Button(1205, 50, 'menu', activeScene().main_menu, 'buttons/', 50, 50).simple()
 		Button(1010, 50, 'items', store_func, 'buttons/', 175, 50).simple()
 		Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
 
@@ -921,8 +923,10 @@ class activeScene(Screen):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
-		pygame.mixer.music.load('H1.mp3')
-		pygame.mixer.music.play(-1)
+		#pygame.mixer.Channel(0).play(pygame.mixer.Sound('pop.mp3'))
+		#pygame.mixer.Channel(1).play(pygame.mixer.Sound('H1.mp3'))
+		#pygame.mixer.music.load('H1.mp3')
+		#pygame.mixer.music.play(-1)
 
 		while not self.game_quit:
 			for event in pygame.event.get():
@@ -936,6 +940,22 @@ class activeScene(Screen):
 			Button(self.start_pos_x, self.start_pos_y, start_buttons[0], 'Scene0').aScene()
 			Button(self.start_pos_x, self.start_pos_y + self.start_offset_y, start_buttons[1], 'Scene0').aScene()
 			Button(self.start_pos_x, self.start_pos_y + 2*self.start_offset_y, start_buttons[2], 'Scene0').aScene()
+			pygame.display.update()
+			clock.tick(60)
+
+	def main_menu(self):
+
+		gameDisplay.fill(self.color)
+		renderImage('menu_panel', '', 0, 125).midtop()
+		while not self.game_quit:
+			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						pygame.quit()
+						quit()
+				if event.type == pygame.QUIT:
+					pygame.quit()
+					quit()
 			pygame.display.update()
 			clock.tick(60)
 
