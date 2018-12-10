@@ -1,4 +1,5 @@
 import pygame
+import pickle
 
 # DIMENSIONS
 display_width = 1280
@@ -645,8 +646,8 @@ choice_texts = {
 	'GameOver': ('Back to start', '', ''),
 	 }
 
-# SEE NEXTS UPDATE ABOVE
-outcome_actions = {'dIntro': ('dScene4', 'Intro2', 'dScene3'), 'dScene2': ('dIntro', 'dScene4', 'dScene3'), 'dScene3': ('dIntro', 'dScene2', 'dScene4'), 'dScene4': ('dScene3', 'dScene2', 'dIntro')}
+# A list of previous the previous scenes, the last element is the latest scene
+previous_scenes = []
 
 # Should be a dictionary where there are some special interactions in a scene
 # Will find a way to interact with this
@@ -803,7 +804,7 @@ class Button:
 
 class Screen:
 
-	def __init__(self, scene_name):
+	def __init__(self, scene_name = ''):
 
 		self.game_quit = False
 		self.scene_name = scene_name
@@ -825,9 +826,11 @@ class Screen:
 
 	def button(self):
 		Button(1205, 50, 'menu', menu, 'buttons/', 50, 50).simple()
-		Button(1010, 50, 'items', buy_func, 'buttons/', 175, 50).simple()
+		Button(1010, 50, 'items', store_func, 'buttons/', 175, 50).simple()
+		Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
 
 	def store(self):
+
 		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
@@ -840,12 +843,13 @@ class Screen:
 
 class passiveScene(Screen):
 
-	def __init__(self, scene_name):
+	def __init__(self, scene_name = ''):
 
 		Screen.__init__(self, scene_name)
 		self.scene_done = False
 		self.line = 0
 		self.next_type = string_to_callable(scene_types.get(self.next_scene))
+		previous_scenes.append(scene_name)
 
 	def execute(self):
 
@@ -896,7 +900,7 @@ class passiveScene(Screen):
 
 class activeScene(Screen):
 
-	def __init__(self, scene_name):
+	def __init__(self, scene_name = ''):
 
 		Screen.__init__(self, scene_name)
 		self.oddity = oddities.get(scene_name)
@@ -993,7 +997,17 @@ def menu():
 
 def item_use():
 
-	renderImage('menu_panel', '', 0, 125).midtop()
+	main()
+
+def store_func():
+
+	activeScene().inventory()
+
+def save():
+
+	current_scene = previous_scenes[-1]
+	pickle.dump(current_scene, open("savedata.txt", "wb"))
+	print(previous_scenes)
 
 def main():
 
