@@ -1,3 +1,4 @@
+
 # COPY PASTE ALL OF THIS TO REPLACE STORY DICTIONARIES
 # 
 
@@ -292,7 +293,7 @@ scenery = {
 	'TeenagehoodEvolution1': 'dark_background',
 	'TeenagehoodEvolution1': 'dark_background',
 
-	'Scene31': 'bedroom-dusk',
+	'Scene31': 'cafe',
 	'Scene32': 'park',
 	'Scene33': 'kimi',
 
@@ -838,6 +839,9 @@ dialogue = {
 		('SELF', 'Your mom would be proud.'),
 		],
 	'Scene31': [
+		('SELF', 'You\'re all grown up now, you\'re now,'),
+		('SELF', 'taking up college when you remember'),
+		('SELF', 'that scientific journal from high school.'),
 		('SELF', 'Let me take a look at this...'),
 		('SELF', 'You open the scientific journal and'),
 		('devs', 'read through its contents'),
@@ -878,7 +882,7 @@ dialogue = {
 		('devs', 'playing DotA instead of studying'),
 		('devs', 'you flunked out of high school and'),
 		('devs', 'got a job as a convenience store clerk.'),
-		('devs', ''),
+		('devs', 'You head downstairs to get to work.'),
 		],
 	'Scene35': [
 		('SELF', 'I\'m heading out to work, Mom.'),
