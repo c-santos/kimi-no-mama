@@ -1013,7 +1013,7 @@ class activeScene(Screen):
 			pygame.display.update()
 			clock.tick(60)
 
-	def inventory(self):
+	def save_slots(self):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
@@ -1034,17 +1034,13 @@ class activeScene(Screen):
 			pygame.display.update()
 			clock.tick(60)
 
-def menu():
-
-	renderImage('menu_panel', '', 0, 125).midtop()
-
 def item_use():
 
 	main()
 
-def store_func():
+def save_func():
 
-	activeScene().inventory()
+	activeScene().save_slots()
 
 def save():
 
