@@ -944,7 +944,7 @@ class activeScene(Screen):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
-		pygame.mixer.music.load('H1.mp3')
+		pygame.mixer.music.load('H2.mp3')
 		pygame.mixer.music.play(-1)
 
 		while not self.game_quit:
@@ -970,6 +970,7 @@ class activeScene(Screen):
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 		displayText('What do you want to do?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		renderImage('menu_panel', '', 0, self.menu_panel_y).midtop()
+		displayText('MENU', 0, self.speaker_text_size, self.color_speaker, 530, 49, self.speaker_font).passivecenter()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
