@@ -144,7 +144,7 @@ nexts = {
 			'Scene12': 'Scene13',
 			'Scene13': 'Scene14',
 			'Scene14': 'dScene14',
-			'dScene14': ('Scene14.1', 'Scene14.2', ''),  # POSTER SCENE
+			'dScene14': ('Scene14.1', 'Scene14.2', 'Scene14.1'),  # POSTER SCENE
 				'Scene14.1': 'Scene15',
 				'Scene14.2': 'Scene15',
 				'Scene15': 'dScene15',
@@ -155,7 +155,7 @@ nexts = {
 									'Scene15.1.1.1': 'ChildhoodEvolution',
 									'Scene15.1.1.2': 'ChildhoodEvolution',
 						'Scene15.2': 'Scene15.2.1',
-							'Scene15.2': 'dScene15.2.1',
+							'Scene15.2.1': 'dScene15.2.1',
 								'dScene15.2.1': ('Scene15.2.1.1', 'Scene15.2.1.2', 'Scene15.2.1.1'), #  coke
 									'Scene15.2.1.1': 'ChildhoodEvolution',
 									'Scene15.2.1.2': 'ChildhoodEvolution',
@@ -472,9 +472,9 @@ dialogue = {
 		('devs', 'By the way, good luck dealing with your mom.'),
 		],
 	'Scene4': [
-		('DOCTOR', 'Congratulations, Ma\'am, it was successful'),
-		('DOCTOR', 'and it’s a baby boy!'),
-		('DOCTOR', 'Good luck on your motherhood.'),
+		('DOC', 'Congratulations, Ma\'am, it was successful'),
+		('DOC', 'and it’s a baby boy!'),
+		('DOC', 'Good luck on your motherhood.'),
 		('devs', 'Just before you "evolve",'),
 		('devs', 'you see that devilish smile of hers.'),
 		('devs', 'But she doesn’t know what’s coming.'),
@@ -489,7 +489,7 @@ dialogue = {
 		('SELF', 'She wants stupid? Show her stupid.'),
 		],
 	'Scene6.1': [
-		('devs', 'Good thing you learned how to cry! (+1 XP)'),
+		('devs', 'Good thing you learned how to cry!'),
 		('MOM', 'Awww, don’t cry Kid.'),
 		('MOM', 'You know you’re so cute when you cry.'),
 		('SELF', 'Oh come on! How is that cute?'),
@@ -532,10 +532,10 @@ dialogue = {
 		('devs', 'And that was the last time you fell asleep.'),
 		],
 	'Scene9.2': [
-		('devs', '(+20 life exp) You’ve grown up really good.'),
+		('devs', 'You’ve grown up really good.'),
 		],
 	'Scene9.3': [
-		('devs', '(+15 life experience) for being awesome.'),
+		('devs', 'Nice Victory Royale, scrub.'),
 		],
 	'Scene10': [
 		('MOM', 'Here\'s breakfast. Sit down and eat.'),
@@ -548,7 +548,6 @@ dialogue = {
 	'Scene10.1': [
 		('SELF', 'Sorry Mom, I was just spacing out is all'),
 		('MOM', 'Okay, hurry up the bus is here.'),
-		('devs', 'You earned +10 life xp'),
 		],
 	'Scene10.2': [
 		('SELF', 'Oh the bus is here, I gotta go Mom sorry.'),
@@ -577,7 +576,6 @@ dialogue = {
 		('devs', 'TWICE album added to inventory.'),
 		('SELF', 'They look cute,'),
 		('SELF', 'I should probably keep this for later.'),
-		('devs', 'You earned +15 life exp.'),
 		],
 	'Scene13': [
 		('SELF', 'Ahh, it’s always relaxing here.'),
@@ -592,11 +590,11 @@ dialogue = {
 	'Scene14': [
 		('devs', 'While running through the hallway,'),
 		('devs', 'you notice some commotion going on outside'),
-		('devs', 'Apparently, someone  jumped off the building'),
+		('devs', 'Apparently, someone jumped off the building'),
 		('SELF', 'What’s with people these days,'),
 		('SELF', 'doing all sorts of stupid things'),
 		('devs', 'You shrug it off as you see someone'),
-		('devsdevs', 'crying while looking up at a poster,'),
+		('devs', 'crying while looking up at a poster,'),
 		('devs', 'but you are in a hurry.'),
 		('devs', 'Do you decide to stop and look at it'),
 		('devs', 'or continue running?'),
@@ -604,7 +602,7 @@ dialogue = {
 	'Scene14.1': [
 		('SELF', 'It should only take a sec.'),
 		('SELF', '"Psalm 23:4"'),
-		('devs', 'You read the poster and earn +20 XP.'),
+		('devs', 'You read the poster.'),
 		],
 	'Scene14.2': [
 		('devs', 'You continue on outside the school'),
@@ -634,13 +632,10 @@ dialogue = {
 		('devs', 'You see three items.'),
 		('SELF', 'A Bayesian-based email spam filter?'),
 		('SELF', 'What the hell is this?'),
-		('devs', '+15 XP'),
 		('SELF', 'A DotA 2 game folder?'),
 		('SELF', 'I should give this a try sometime...'),
-		('devs', '+15 XP'),
 		('SELF', 'Hmm, Tito Badang.mp4...'),
 		('devs', 'Plays TitoBadang.mp4'),
-		('devs', '+60 XP'),
 		('SELF', 'Oh shit it\'s late, I gotta sleep.'),
 		],
 	'Scene15.1.1.2': [
@@ -666,7 +661,6 @@ dialogue = {
 		('devs', 'You open the bag and smell it'),
 		('devs', 'You realize you sniffed some cocaine'),
 		('devs', 'You become high as fuck'),
-		('devs', '+90 XP'),
 		('SELF', 'You get so high, you pass out.'),
 		],
 	'Scene15.2.1.2': [
@@ -826,7 +820,6 @@ dialogue = {
 		('devs', 'hours of the day playing DotA'),
 		('SELF', 'You wasted the day but, hey,'),
 		('SELF', 'at least you got that +25 MMR'),
-		('SELF', 'You earned +10 life exp'),
 		],
 	'Scene30': [
 		('devs', 'Ahh shit, I almost forgot.'),
@@ -834,7 +827,6 @@ dialogue = {
 		('SELF', 'I better study.'),
 		('SELF', 'You study for your exams.'),
 		('SELF', 'Your mom would be proud.'),
-		('SELF', 'You earned +20 life exp'),
 		],
 	'Scene31': [
 		('SELF', 'Let me take a look at this...'),
@@ -903,17 +895,16 @@ dialogue = {
 		('', ''),
 		],
 	'InfancyEvolution': [
+		('devs', 'Congratulations!'),
 		('devs', 'You are now entering Childhood'),
-		('devs', ''),
-
 		],
 	'InfancyEvolCheck': [
 		('', ''),
 
 		],
 	'ChildhoodEvolution': [
-		('', 'You are now entering TeenageHood'),
-		('', ''),
+		('devs', 'Congratulations!'),
+		('devs', 'You are now entering TeenageHood'),
 
 		],
 	'ChildEvolCheck': [
@@ -921,6 +912,7 @@ dialogue = {
 
 		],
 	'TeenagehoodEvolution': [
+		('devs', 'Congratulations!'),
 		('devs', 'You are now entering Adulthood'),
 		],
 	'TeenagehoodEvolCheck': [
@@ -938,9 +930,11 @@ choice_texts = {
 	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'),
 	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'),
 	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'),
-	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', ''),
+	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', 'Let devs choose'),
 	'dScene14': ('Look', 'Ignore', 'Let devs choose'),
 	'dScene15': ('Flash drive', 'White brick', 'Soup'),
+	'dScene15.1.1': ('Check flash drive', 'Sleep', 'Let devs choose'),
+	'dScene15.2.1': ('Check white brick', 'Sleep', 'Let devs choose'),
 	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
 
 	'GameOver': ('Back to start', '', ''),
