@@ -376,7 +376,7 @@ character = {
 	'Scene25': 'mom-solofinger',
 	'Scene26': 'mom-solofinger',
 	'Scene27': '',
-	'dScene27': '',
+	'dScene27': 'journal',
 	'Scene27.1.1': '',
 	'Scene27.1.2': '',
 	'Scene27.1.3': '',
