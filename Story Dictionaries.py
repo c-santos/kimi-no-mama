@@ -66,7 +66,8 @@ scene_types = {
 		'Scene11.2': 'passiveScene',
 		'Scene16': 'passiveScene',
 		'Scene17': 'passiveScene',
-	'ChildhoodEvolution': 'passiveScene', # EVOL SCENE
+	'ChildhoodEvolution1': 'passiveScene', # EVOL SCENE
+	'ChildhoodEvolution2': 'passiveScene', # EVOL SCENE
 
 	'Scene18': 'passiveScene',
 	'Scene19': 'passiveScene',
@@ -74,6 +75,7 @@ scene_types = {
 	'Scene21': 'passiveScene',
 	'Scene22': 'passiveScene',  # SUICIDE ATTEMPT 1 (from POSTER SCENE)
 	'Scene23': 'passiveScene',
+	'Scene23.1': 'passiveScene',
 	'Scene24': 'passiveScene',
 	'Scene25': 'passiveScene',
 	'Scene26': 'passiveScene',
@@ -97,7 +99,6 @@ scene_types = {
 	'Scene36': 'passiveScene',
 	'Scene37': 'passiveScene',
 
- 	'Credits': 'passiveScene',
 	'GameOver': 'activeScene',
 	}
 
@@ -157,15 +158,15 @@ nexts = {
 						'Scene15.2': 'Scene15.2.1',
 							'Scene15.2.1': 'dScene15.2.1',
 								'dScene15.2.1': ('Scene15.2.1.1', 'Scene15.2.1.2', 'Scene15.2.1.1'), #  coke
-									'Scene15.2.1.1': 'ChildhoodEvolution',
-									'Scene15.2.1.2': 'ChildhoodEvolution',
+									'Scene15.2.1.1': 'ChildhoodEvolution2',
+									'Scene15.2.1.2': 'ChildhoodEvolution2',
 						'Scene15.3': 'GameOver', #  SOUP
 
 		'Scene11.2': 'Scene16', #  CAFETERIA SCENE
 		'Scene16': 'Scene17',
-		'Scene17': 'ChildhoodEvolution',
+		'Scene17': 'ChildhoodEvolution1',
 
-		'ChildhoodEvolution': 'Scene18',
+		'ChildhoodEvolution1': 'Scene18',
 		'Scene18': 'Scene19',
 		'Scene19': 'Scene20',
 		'Scene20': 'Scene21',
@@ -174,6 +175,8 @@ nexts = {
 		'Scene23': 'Scene24',
 		'Scene24': 'GameOver',
 
+		'ChildhoodEvolution2': 'Scene23.1',
+		'Scene23.1': 'Scene25',
 		'Scene25': 'Scene26',
 		'Scene26': 'Scene27',
 		'Scene27': 'dScene27',
@@ -189,15 +192,12 @@ nexts = {
 		'TeenagehoodEvolution1': 'Scene31',
 		'Scene31': 'Scene23',
 		'Scene32': 'Scene24',
-		'Scene33': 'Credits',
+		'Scene33': 'GameOver',
 		'TeenagehoodEvolution2': 'Scene34',
 		'Scene34': 'Scene35',
 		'Scene35': 'Scene36',
 		'Scene36': 'Scene37',
-		'Scene37': 'Credits',
-
-
-	'Credits': '',
+		'Scene37': 'GameOver',
 	'GameOver': ('Scene0', '', '')
 	}
 
@@ -266,7 +266,8 @@ scenery = {
 		'Scene11.2': 'classroom', #  CAFETERIA SCENE
 		'Scene16': 'cafeteria',
 		'Scene17': 'living-dusk',
-	'ChildhoodEvolution': 'dark_background', # EVOL SCENE
+	'ChildhoodEvolution1': 'dark_background', # EVOL SCENE
+	'ChildhoodEvolution2': 'dark_background', # EVOL SCENE
 
 	'Scene18': 'bedroom',
 	'Scene19': 'living',
@@ -274,6 +275,7 @@ scenery = {
 	'Scene21': 'hospital',
 	'Scene22': 'bedroom-dusk',
 	'Scene23': 'kitchen-day',
+	'Scene23.1': 'kitchen-day',
 	'Scene24': 'bedroom',
 	'Scene25': 'bedroom',
 	'Scene26': 'kitchen-day',
@@ -364,7 +366,8 @@ character = {
 		'Scene11.2': '',
 		'Scene16': '',
 		'Scene17': 'piano', 
-		'ChildhoodEvolution': 'levelup2', # EVOL SCENE
+		'ChildhoodEvolution1': 'levelup2', # EVOL SCENE
+		'ChildhoodEvolution2': 'levelup2', # EVOL SCENE
 
 	'Scene18': '',
 	'Scene19': '',
@@ -372,6 +375,7 @@ character = {
 	'Scene21': 'mom-solosigh',
 	'Scene22': '',
 	'Scene23': 'mom-solosigh',
+	'Scene23.1': 'mom-solosigh',
 	'Scene24': '',
 	'Scene25': 'mom-solofinger',
 	'Scene26': 'mom-solofinger',
@@ -397,7 +401,6 @@ character = {
 	'Scene36': '',
 	'Scene37': 'doctor',
 
-	'Credits': '',
 	'GameOver': '',
 	}
 
@@ -745,6 +748,12 @@ dialogue = {
 		('devs', 'down for breakfast,'),
 		('MOM', 'I wonder what this child is up to'),
 		],
+	'Scene23.1': [
+		('devs', 'During the morning, Mom was'),
+		('devs', 'waiting for you to come'),
+		('devs', 'down for breakfast,'),
+		('MOM', 'I wonder what this child is up to'),
+		],
 	'Scene24': [
 		('devs', 'Upon opening the door, she sees'),
 		('devs', 'your lifeless body dangling'),
@@ -902,10 +911,13 @@ dialogue = {
 		('', ''),
 
 		],
-	'ChildhoodEvolution': [
+	'ChildhoodEvolution1': [
 		('devs', 'Congratulations!'),
 		('devs', 'You are now entering TeenageHood'),
-
+		],
+	'ChildhoodEvolution2': [
+		('devs', 'Congratulations!'),
+		('devs', 'You are now entering TeenageHood'),
 		],
 	'ChildEvolCheck': [
 		('', ''),
@@ -936,6 +948,7 @@ choice_texts = {
 	'dScene15.1.1': ('Check flash drive', 'Sleep', 'Let devs choose'),
 	'dScene15.2.1': ('Check white brick', 'Sleep', 'Let devs choose'),
 	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
+	'dScene28': ('Play DotA', 'Study', 'Let devs choose'),
 
-	'GameOver': ('Back to start', '', ''),
+	'GameOver': ('Back to start', 'Main menu', 'Quit'),
 	 }
