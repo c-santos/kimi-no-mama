@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import pygame.gfxdraw
 
 # DIMENSIONS
 display_width = 1280
@@ -11,7 +12,7 @@ panel_offset = display_height - (panel_pos_y + 200)
 black = (0, 0, 0)
 white = (255, 255, 255)
 gray = (86, 86, 86)
-transparent = (0, 0, 255, 0)
+transparent = (100, 0, 0, 128)
 
 # Kung gusto niyo itry if nagana yung scene, you can run the code tas click ka lang until makapunta ka sa scene na yun
 # Or call the function in def main()
@@ -101,6 +102,9 @@ class renderImage:
 		self.image = pygame.image.load(path+image_type+filename+extension)
 		self.imageRect = self.image.get_rect()
 
+	def load(self):
+		return self.image
+
 	def center(self):
 		self.imageRect.center = (self.display_width/2, self.display_height/2)
 		gameDisplay.blit(self.image, self.imageRect)
@@ -110,7 +114,7 @@ class renderImage:
 		gameDisplay.blit(self.image, self.imageRect)
 
 	def midleft(self):
-		self.imageRect.midleft = (self.pos_x, self.display_height/2)
+		self.imageRect.midleft = (self.pos_x, self.pos_y)
 		gameDisplay.blit(self.image, self.imageRect)
 
 	def coordinates(self):
@@ -187,33 +191,37 @@ class Button:
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
+		#Rect = pygame.Rect
 		buttonRect = pygame.draw.rect(gameDisplay, transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
 
 		if buttonRect.collidepoint(mouse_position):
-			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).center()
 			if left_click and self.action:
 				renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
 				string_to_callable(scene_types.get(self.action))(self.action).execute()
 
 		else:
-			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).center()
 
 	def simple(self):
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
-		buttonRect = pygame.draw.rect(gameDisplay,transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
-
+		#Rect = pygame.Rect(self.pos_x, self.pos_y, self.button_width, self.button_height)
+		buttonRect = renderImage(self.image, self.image_type, self.pos_x, self.pos_y).load().get_rect()
+		buttonRect.midleft = (self.pos_x, self.pos_y)
+		#buttonRect = pygame.draw.rect(gameDisplay, gray, Rect)
+		#pygame.gfxdraw.box(gameDisplay, pygame.Rect(self.pos_x, self.pos_y , self.button_width , self.button_height), transparent)
 		if buttonRect.collidepoint(mouse_position):
-			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).midleft()
 			if left_click and self.action:
 				self.action()
 
 		else:
-			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).midleft()
 
 class Screen:
-	#pos_x, pos_y, image, action = None, image_type = 'buttons/', button_width = 48, button_height = 48
+
 	def __init__(self, scene_name):
 
 		self.game_quit = False
@@ -235,7 +243,8 @@ class Screen:
 		self.dialog_box = 'panel'
 
 	def button(self):
-		Button(1050, 50, 'button1', menu, 'buttons/', 175, 50).simple()
+		Button(1205, 50, 'menu', passiveScene('Scene5').execute, 'buttons/', 50, 50).simple()
+		Button(1010, 50, 'items', activeScene('dScene3').execute, 'buttons/', 175, 50).simple()
 
 class passiveScene(Screen):
 
@@ -306,7 +315,6 @@ class activeScene(Screen):
 		self.button_offset_x = 70
 		self.button_offset_y = 24
 
-
 	def execute(self):
 
 		gameDisplay.fill(self.color)
@@ -339,7 +347,7 @@ class activeScene(Screen):
 			clock.tick(60)
 
 def menu():
-	pass
+	passiveScene('Scene5').execute()
 
 def main():
 
