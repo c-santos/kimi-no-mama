@@ -823,6 +823,9 @@ class Screen:
 		self.color_speaker = gray
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
+		self.item_pos_x = 50
+		self.item_pos_y = 50
+		self.item_offset = 75
 		self.speaker_font = 'RobotoMono-Italic'
 		self.dialog_box = 'dialog_panel'
 
@@ -830,9 +833,24 @@ class Screen:
 		Button(1205, 50, 'menu', activeScene().main_menu, 'buttons/', 50, 50).simple()
 		Button(1010, 50, 'items', store_func, 'buttons/', 175, 50).simple()
 		Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
+		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 3*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 4*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 5*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 6*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 7*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 8*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
+		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
 
-	def store(self):
+	def menu_buttons(self):
 
+		Button(551, 210, 'save', store_func, 'buttons/', 189, 48).simple()
+		Button(551, 280, 'load', store_func, 'buttons/', 189, 48).simple()
+		Button(551, 350, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
+
+	def save_buttons(self):
 		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
@@ -842,6 +860,9 @@ class Screen:
 		Button(self.item_pos_x, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
+		Button(self.item_pos_x, self.item_pos_y + 3*self.item_offset, buttons[1], item_use).simple()
+
+
 
 class passiveScene(Screen):
 
@@ -915,18 +936,13 @@ class activeScene(Screen):
 		self.start_pos_x = 535
 		self.start_pos_y = 470
 		self.start_offset_y = 70
-		self.item_pos_x = 50
-		self.item_pos_y = 50
-		self.item_offset = 75
 
 	def game_start(self):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
-		#pygame.mixer.Channel(0).play(pygame.mixer.Sound('pop.mp3'))
-		#pygame.mixer.Channel(1).play(pygame.mixer.Sound('H1.mp3'))
-		#pygame.mixer.music.load('H1.mp3')
-		#pygame.mixer.music.play(-1)
+		pygame.mixer.music.load('H1.mp3')
+		pygame.mixer.music.play(-1)
 
 		while not self.game_quit:
 			for event in pygame.event.get():
@@ -946,6 +962,10 @@ class activeScene(Screen):
 	def main_menu(self):
 
 		gameDisplay.fill(self.color)
+		renderImage('start_background', 'scenery/').center()
+		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+		displayText('What do you want to do?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		renderImage('menu_panel', '', 0, 125).midtop()
 		while not self.game_quit:
 			for event in pygame.event.get():
@@ -956,6 +976,7 @@ class activeScene(Screen):
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
+			Screen().menu_buttons()
 			pygame.display.update()
 			clock.tick(60)
 
@@ -1009,7 +1030,7 @@ class activeScene(Screen):
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
-			Screen.store(self)
+			Screen.save_buttons(self)
 			pygame.display.update()
 			clock.tick(60)
 
@@ -1030,6 +1051,11 @@ def save():
 	current_scene = previous_scenes[-1]
 	pickle.dump(current_scene, open("savedata.txt", "wb"))
 	print(previous_scenes)
+
+def game_quit():
+
+	pygame.quit()
+	quit()
 
 def main():
 
