@@ -896,6 +896,8 @@ class passiveScene(Screen):
 				self.scene_done = True
 				continue
 			pygame.display.update()
+			pygame.mixer.music.load('H1.mp3')
+			pygame.mixer.music.play(-1)
 			clock.tick(90)
 
 class activeScene(Screen):
@@ -942,6 +944,8 @@ class activeScene(Screen):
 	def execute(self):
 
 		gameDisplay.fill(self.color)
+		pygame.mixer.music.load('H1.mp3')
+		pygame.mixer.music.play(-1)
 		renderImage(self.background, 'scenery/').center()
 		Screen.button(self)
 		if self.speaker:
