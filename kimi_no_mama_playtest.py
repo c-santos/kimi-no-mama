@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import pygame.gfxdraw
 
 # DIMENSIONS
 display_width = 1280
@@ -11,7 +12,7 @@ panel_offset = display_height - (panel_pos_y + 200)
 black = (0, 0, 0)
 white = (255, 255, 255)
 gray = (86, 86, 86)
-transparent = (0, 0, 255, 0)
+transparent = (100, 0, 0, 128)
 
 # Kung gusto niyo itry if nagana yung scene, you can run the code tas click ka lang until makapunta ka sa scene na yun
 # Or call the function in def main()
@@ -78,7 +79,6 @@ oddities = {}
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FULLSCREEN)
-#pygame.display.toggle_fullscreen
 pygame.display.set_caption('Kimi no Mama')
 gameIcon = pygame.image.load('assets/icon.png')
 pygame.display.set_icon(gameIcon)
@@ -111,7 +111,7 @@ class renderImage:
 		gameDisplay.blit(self.image, self.imageRect)
 
 	def midleft(self):
-		self.imageRect.midleft = (self.pos_x, self.display_height/2)
+		self.imageRect.midleft = (self.pos_x, self.pos_y)
 		gameDisplay.blit(self.image, self.imageRect)
 
 	def coordinates(self):
@@ -188,30 +188,32 @@ class Button:
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
+		#Rect = pygame.Rect
 		buttonRect = pygame.draw.rect(gameDisplay, transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
 
 		if buttonRect.collidepoint(mouse_position):
-			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).center()
 			if left_click and self.action:
 				renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
 				string_to_callable(scene_types.get(self.action))(self.action).execute()
 
 		else:
-			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).center()
 
 	def simple(self):
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
-		buttonRect = pygame.draw.rect(gameDisplay,transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
-
+		Rect = pygame.Rect(self.pos_x, self.pos_y, self.button_width, self.button_height).midleft
+		buttonRect = pygame.draw.rect(gameDisplay, gray, Rect)
+		#pygame.gfxdraw.box(gameDisplay, pygame.Rect(self.pos_x, self.pos_y , self.button_width , self.button_height), transparent)
 		if buttonRect.collidepoint(mouse_position):
-			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).midleft()
 			if left_click and self.action:
-				action()
+				self.action()
 
 		else:
-			renderImage(self.image, self.pos_x, self.pos_y).coordinates()
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).midleft()
 
 class Screen:
 
@@ -233,6 +235,11 @@ class Screen:
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.speaker_font = 'RobotoMono-Italic'
+		self.dialog_box = 'panel'
+
+	def button(self):
+		Button(1195, 25, 'menu', passiveScene('Scene5').execute, 'buttons/', 50, 50).simple()
+		Button(1000, 25, 'items', activeScene('dScene3').execute, 'buttons/', 175, 50).simple()
 
 class passiveScene(Screen):
 
@@ -249,23 +256,29 @@ class passiveScene(Screen):
 		renderImage(self.background, 'scenery/').center()
 		if self.speaker:
 			renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+		renderImage('panel', '', 0, self.panel_pos_y).midtop()
 		while not self.game_quit:
 			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						pygame.quit()
+						quit()
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
-				if event.type == pygame.MOUSEBUTTONDOWN:
+				elif event.type == pygame.MOUSEBUTTONDOWN:
 					if event.button == 1:
 						renderImage(self.background, 'scenery/').center()
 						if self.speaker:
 							renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-						renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+						renderImage('panel', '', 0, self.panel_pos_y).midtop()
 						self.line += 1
 						if self.line == len(dialogue.get(self.scene_name)):
 							self.next_type(self.next_scene).execute()
 						self.scene_done = False
 			self.speaker_name, self.text_list = dialogue.get(self.scene_name)[self.line]
+			Screen.button(self)
+			pygame.display.update()
 			if not self.scene_done:
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
@@ -273,40 +286,40 @@ class passiveScene(Screen):
 				continue
 			else:
 				renderImage(self.background, 'scenery/').center()
+				Screen.button(self)
 				if self.speaker:
 					renderImage(self.speaker, 'character/', 0, self.char_pos_y).midtop()
-				renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+				renderImage('panel', '', 0, self.panel_pos_y).midtop()
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).passive_panel()
-
 				self.scene_done = True
 				continue
-
-			clock.tick(60)
+			pygame.display.update()
+			clock.tick(90)
 
 class activeScene(Screen):
 
 	def __init__(self, scene_name):
 
 		Screen.__init__(self, scene_name)
-		self.char_pos_x += 200
 		self.oddity = oddities.get(scene_name)
+		self.choices = choice_texts.get(self.scene_name)
+		self.char_pos_x += 200
 		self.button_pos_x = 250
 		self.button_pos_y = 310
 		self.button_offset_x = 70
 		self.button_offset_y = 24
-		self.outcome_text = outcome_texts.get(self.scene_name)
-		self.choices = choice_texts.get(self.scene_name)
 
 	def execute(self):
 
 		gameDisplay.fill(self.color)
+		Screen.button(self)
 		renderImage(self.background, 'scenery/').center()
 		if self.speaker:
 			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
 		if self.oddity:
 			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
-		renderImage('panel1', '', 0, self.panel_pos_y).midtop()
+		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivemidleft()
@@ -314,17 +327,22 @@ class activeScene(Screen):
 		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivemidleft()
 		while not self.game_quit:
 			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						pygame.quit()
+						quit()
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					quit()
 			Button(self.button_pos_x, self.button_pos_y, buttons[0], self.next_scene[0]).aScene()
 			Button(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.next_scene[1]).aScene()
 			Button(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.next_scene[2]).aScene()
+			Screen.button(self)
 			pygame.display.update()
 			clock.tick(60)
 
 def menu():
-	pass
+	passiveScene('Scene5').execute()
 
 def main():
 
