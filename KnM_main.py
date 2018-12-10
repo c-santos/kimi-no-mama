@@ -1,5 +1,8 @@
 import pygame
 import pickle
+import datetime
+import os.path
+import glob
 
 # DIMENSIONS
 display_width = 1280
@@ -440,9 +443,7 @@ dialogue = {
 		], 
 	'Scene1': [
 		('devs', 'Please enter your name here:'),
-		('devs', 'haven\'t coded it yet'),
-		('devs', 'should be an enter name prompt.'),
-		('devs', 'Oof. Game devs suck.'),
+		('devs', 'Oof. Sorry game devs suck.'),
 		('devs', 'From now on, your name\'s Kid.'),
 		('devs', 'Deal with it.'),
 		('SELF', 'I still don’t know where I am...'),
@@ -491,7 +492,7 @@ dialogue = {
 		('devs', 'You’re a baby!'),
 		('devs', 'What do you think your gender should be?'),
 		('devs', 'Sike!'),
-		('devs', 'We already assumed your gender, sorry.'),
+		('devs', 'We already assumed your gender . . . '),
 		('SELF', 'Isn\'t that kind of sexist...'),
 		('devs', 'Fly away you little shit.'),
 		('devs', 'By the way, good luck dealing with your mom.'),
@@ -1149,6 +1150,8 @@ class Screen:
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
 		self.item_pos_x = 80
+		self.save_pos_x = 180
+		self.save_pos_y = 120
 		self.item_pos_y = 95
 		self.item_offset = 70
 		self.menu_panel_y = 30
@@ -1157,7 +1160,6 @@ class Screen:
 
 	def button(self):
 		Button(1205, 50, 'menu', god_menu, 'buttons/', 50, 50).simple()
-		#Button(930,50, 'menu', save, 'buttons/', 50,50).simple()
 		Button(self.item_pos_x, self.item_pos_y, item_buttons[0], item_use).simple()
 		Button(self.item_pos_x + self.item_offset, self.item_pos_y, item_buttons[1], item_use).simple()
 		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, item_buttons[2], item_use).simple()
@@ -1167,7 +1169,7 @@ class Screen:
 		Button(self.item_pos_x + 6*self.item_offset, self.item_pos_y, item_buttons[6], item_use).simple()
 		Button(self.item_pos_x + 7*self.item_offset, self.item_pos_y, item_buttons[7], item_use).simple()
 		Button(self.item_pos_x + 8*self.item_offset, self.item_pos_y, item_buttons[8], item_use).simple()
-		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, 'button_green', item_use).simple()
+		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, 'button_gray', item_use).simple()
 
 	def menu_buttons(self):
 
@@ -1175,16 +1177,28 @@ class Screen:
 		Button(551, self.menu_panel_y + 195, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
 
 	def save_buttons(self):
-		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], item_use).simple()
-		Button(self.item_pos_x, self.item_pos_y + self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x + self.item_offset, self.item_pos_y + self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y + self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x + self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y + 2*self.item_offset, buttons[1], item_use).simple()
-		Button(self.item_pos_x, self.item_pos_y + 3*self.item_offset, buttons[1], item_use).simple()
+		Button(self.save_pos_x, self.save_pos_y, buttons[1], Save().saveslot1).simple()
+		Button(self.save_pos_x + self.item_offset, self.save_pos_y, buttons[1], Save().saveslot2).simple()
+		Button(self.save_pos_x + 2*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot3).simple()
+		Button(self.save_pos_x + 3*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot4).simple()
+		Button(self.save_pos_x + 4*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot5).simple()
+		Button(self.save_pos_x + 5*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot6).simple()
+		Button(self.save_pos_x + 6*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot7).simple()
+		Button(self.save_pos_x + 7*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot8).simple()
+		Button(self.save_pos_x + 8*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot9).simple()
+		Button(self.save_pos_x + 9*self.item_offset, self.save_pos_y, buttons[1], Save().saveslot10).simple()
+
+	def load_buttons(self):
+		Button(self.item_pos_x, self.item_pos_y, buttons[1], Load().loadslot1).simple()
+		Button(self.item_pos_x + self.item_offset, self.item_pos_y, buttons[1], Load().loadslot2).simple()
+		Button(self.item_pos_x + 2*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot3).simple()
+		Button(self.item_pos_x + 3*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot4).simple()
+		Button(self.item_pos_x + 4*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot5).simple()
+		Button(self.item_pos_x + 5*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot6).simple()
+		Button(self.item_pos_x + 6*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot7).simple()
+		Button(self.item_pos_x + 7*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot8).simple()
+		Button(self.item_pos_x + 8*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot9).simple()
+		Button(self.item_pos_x + 9*self.item_offset, self.item_pos_y, buttons[1], Load().loadslot10).simple()
 
 class passiveScene(Screen):
 
@@ -1268,6 +1282,7 @@ class activeScene(Screen):
 		self.start_pos_y = 470
 		self.start_offset_y = 70
 		self.color = white
+		previous_scenes.append(scene_name)
 
 	def game_start(self):
 
@@ -1286,8 +1301,8 @@ class activeScene(Screen):
 					pygame.quit()
 					quit()
 			Button(self.start_pos_x, self.start_pos_y, start_buttons[0], 'Scene0').aScene()
-			Button(self.start_pos_x, self.start_pos_y + self.start_offset_y, start_buttons[1], 'Scene0').aScene()
-			Button(self.start_pos_x, self.start_pos_y + 2*self.start_offset_y, start_buttons[2], 'Scene0').aScene()
+			Button(self.start_pos_x, self.start_pos_y + self.start_offset_y + 25, start_buttons[1], activeScene().load_slots).simple()
+			Button(self.start_pos_x, self.start_pos_y + 2*self.start_offset_y + 25, start_buttons[2], game_quit).simple()
 			pygame.display.update()
 			clock.tick(60)
 
@@ -1355,10 +1370,9 @@ class activeScene(Screen):
 
 		gameDisplay.fill(self.color)
 		renderImage('start_background', 'scenery/').center()
-		renderImage('mom-solo', 'character/', self.char_pos_x, self.char_pos_y).coordinates()
 		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
-		displayText('What do you want to do?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+		displayText('What file do you want to access?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
@@ -1371,6 +1385,287 @@ class activeScene(Screen):
 			Screen.save_buttons(self)
 			pygame.display.update()
 			clock.tick(60)
+
+	def load_slots(self):
+		gameDisplay.fill(self.color)
+		renderImage('start_background', 'scenery/').center()
+		
+		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+		displayText('What do you want to do?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+		while not self.game_quit:
+			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						pygame.quit()
+						quit()
+				if event.type == pygame.QUIT:
+					pygame.quit()
+					quit()
+			Screen.load_buttons(self)
+			pygame.display.update()
+			clock.tick(60)
+
+class Load:
+	def loadslot1(self):
+		rabble = os.path.join("savedata/", savedata[0])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot2(self):
+		rabble = os.path.join("savedata/", savedata[1])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot3(self):
+		rabble = os.path.join("savedata/", savedata[2])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot4(self):
+		rabble = os.path.join("savedata/", savedata[3])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot5(self):
+		rabble = os.path.join("savedata/", savedata[4])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot6(self):
+		rabble = os.path.join("savedata/", savedata[5])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot7(self):
+		rabble = os.path.join("savedata/", savedata[6])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot8(self):
+		rabble = os.path.join("savedata/", savedata[7])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot9(self):
+		rabble = os.path.join("savedata/", savedata[8])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+	def loadslot10(self):
+		rabble = os.path.join("savedata/", savedata[9])
+		scene_name = pickle.load(open(rabble, "rb"))
+		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
+class Save:
+	def saveslot1(self):
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 1 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(1)
+		else:
+			try:
+				os.remove(previous_save_1[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot2(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 2 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(2)
+		else:
+			try:
+				os.remove(previous_save_2[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot3(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 3 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(3)
+		else:
+			try:
+				os.remove(previous_save_3[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot4(self):
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 4 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(4)
+		else:
+			try:
+				os.remove(previous_save_4[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot5(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 5 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(5)
+		else:
+			try:
+				os.remove(previous_save_5[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot6(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 6 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(6)
+		else:
+			try:
+				os.remove(previous_save_6[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot7(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 7 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(7)
+		else:
+			try:
+				os.remove(previous_save_7[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+
+	def saveslot8(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 8 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(8)
+		else:
+			try:
+				os.remove(previous_save_8[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot9(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 9 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(9)
+		else:
+			try:
+				os.remove(previous_save_9[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+
+	def saveslot10(self):
+
+		current_time = datetime.datetime.now().isoformat()
+		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
+		i = -1
+		current_scene = previous_scenes[i]
+		pygame.time.delay(200)
+		if not 10 in save_checker:
+			while current_scene == '':
+				i -= 1
+				current_scene = previous_scenes[i] 
+			pickle.dump(current_scene, open(save_data_path, "wb"))
+			previous_save.append(save_data_path)
+			save_checker.append(10)
+		else:
+			try:
+				os.remove(previous_save_10[-1])
+			except OSError:
+				pass
+			pickle.dump(current_scene, open(save_data_path, "wb"))
 
 def item_use():
 
