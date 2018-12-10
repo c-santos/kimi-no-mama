@@ -264,7 +264,7 @@ scenery = {
 				'Scene15.3': 'dark_background', #  SOUP
 
 		'Scene11.2': 'classroom', #  CAFETERIA SCENE
-		'Scene16': 'cafeteria',
+		'Scene16': 'Cafeteriaria',
 		'Scene17': 'living-dusk',
 	'ChildhoodEvolution': 'dark_background', # EVOL SCENE
 
@@ -690,7 +690,7 @@ dialogue = {
 		],
 	'Scene17': [
 		('devs', 'You get home and go straight to your room.'),
-		('devs', 'But you notice an pianobook on the floor.'),
+		('devs', 'But you notice a pianobook on the floor.'),
 		('devs', 'You pick it up and out of nowhere'),
 		('devs', 'you know how to play the piano.'),
 		('devs', 'Amazing, right?'),
@@ -698,7 +698,7 @@ dialogue = {
 		],
 	'Scene18': [
 		('devs', 'You wake up, and notice you have increased'),
-		('devs', 'height and mature appearance'),
+		('devs', 'height and a more mature appearance'),
 		('SELF', 'Nani tf, so desu nEEEEE?'),
 		('devs', 'Stfu bitch.'),
 		('devs', 'As if you were programmed,'),
@@ -706,13 +706,12 @@ dialogue = {
 		('devs', 'not transformed overnight'),
 		('SELF', 'I’m all set.'),
 		('SELF', 'Time to go down and get ready for school'),
-		('', ''),
 		],
 	'Scene19': [
-		('', 'Upon reaching the kitchen,'),
-		('', 'you feel a grumbling pain'),
+		('devs', 'Upon reaching the kitchen,'),
+		('devs', 'you feel a grumbling pain'),
 		('SELF', 'Arghhh!'),
-		('', 'You collapse to the floor'),
+		('devs', 'You collapse to the floor'),
 		],
 	'Scene20': [
 		('devs', 'The next thing you knew,'),
