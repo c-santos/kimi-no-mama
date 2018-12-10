@@ -657,6 +657,7 @@ gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.FUL
 pygame.display.set_caption('Kimi no Mama')
 gameIcon = pygame.image.load('assets/icon.png')
 pygame.display.set_icon(gameIcon)
+pygame.mixer.init()
 clock = pygame.time.Clock()
 
 def string_to_callable(string):
@@ -722,6 +723,8 @@ class displayText:
 
 		string = ''
 		fontography = pygame.font.Font(self.font, self.size)
+		pygame.mixer.music.load('pop.mp3')
+		pygame.mixer.music.play()
 		for character in self.text_list:
 			pygame.event.clear()
 			pygame.time.wait(40)
@@ -813,7 +816,7 @@ class Screen:
 		self.char_pos_y = 150
 		self.text_pos_x = 150
 		self.panel_pos_y = panel_pos_y
-		self.color = white
+		self.color = gray
 		self.color_speaker = gray
 		self.dialog_text_size = 37
 		self.speaker_text_size = 35
@@ -822,7 +825,7 @@ class Screen:
 
 	def button(self):
 		Button(1205, 50, 'menu', menu, 'buttons/', 50, 50).simple()
-		Button(1010, 50, 'items', activeScene('dScene4').popup, 'buttons/', 175, 50).simple()
+		Button(1010, 50, 'items', activeScene('dScene6').popup, 'buttons/', 175, 50).simple()
 
 class passiveScene(Screen):
 
@@ -892,14 +895,16 @@ class activeScene(Screen):
 		self.button_pos_y = 310
 		self.button_offset_x = 70
 		self.button_offset_y = 24
-		self.start_pos_x = 480
-		self.start_pos_y = 400
-		self.start_offset_y = 100
+		self.start_pos_x = 535
+		self.start_pos_y = 470
+		self.start_offset_y = 70
 
 	def game_start(self):
 
 		gameDisplay.fill(self.color)
-		renderImage('street-night', 'scenery/').center()
+		renderImage('start_background', 'scenery/').center()
+		pygame.mixer.music.load('H1.mp3')
+		pygame.mixer.music.play(-1)
 
 		while not self.game_quit:
 			for event in pygame.event.get():
