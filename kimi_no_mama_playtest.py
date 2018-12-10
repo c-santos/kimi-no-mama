@@ -102,6 +102,9 @@ class renderImage:
 		self.image = pygame.image.load(path+image_type+filename+extension)
 		self.imageRect = self.image.get_rect()
 
+	def load(self):
+		return self.image
+
 	def center(self):
 		self.imageRect.center = (self.display_width/2, self.display_height/2)
 		gameDisplay.blit(self.image, self.imageRect)
@@ -204,8 +207,10 @@ class Button:
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
-		Rect = pygame.Rect(self.pos_x, self.pos_y, self.button_width, self.button_height).midleft
-		buttonRect = pygame.draw.rect(gameDisplay, gray, Rect)
+		#Rect = pygame.Rect(self.pos_x, self.pos_y, self.button_width, self.button_height)
+		buttonRect = renderImage(self.image, self.image_type, self.pos_x, self.pos_y).load().get_rect()
+		buttonRect.midleft = (self.pos_x, self.pos_y)
+		#buttonRect = pygame.draw.rect(gameDisplay, gray, Rect)
 		#pygame.gfxdraw.box(gameDisplay, pygame.Rect(self.pos_x, self.pos_y , self.button_width , self.button_height), transparent)
 		if buttonRect.collidepoint(mouse_position):
 			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).midleft()
@@ -238,8 +243,8 @@ class Screen:
 		self.dialog_box = 'panel'
 
 	def button(self):
-		Button(1195, 25, 'menu', passiveScene('Scene5').execute, 'buttons/', 50, 50).simple()
-		Button(1000, 25, 'items', activeScene('dScene3').execute, 'buttons/', 175, 50).simple()
+		Button(1205, 50, 'menu', passiveScene('Scene5').execute, 'buttons/', 50, 50).simple()
+		Button(1010, 50, 'items', activeScene('dScene3').execute, 'buttons/', 175, 50).simple()
 
 class passiveScene(Screen):
 
