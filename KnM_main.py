@@ -1332,44 +1332,6 @@ class activeScene(Screen):
 			pygame.display.update()
 			clock.tick(60)
 
-	def GameOver(self):
-
-		gameDisplay.fill(self.color)
-		pygame.mixer.music.load('end.mp3')
-		pygame.mixer.music.play(-1)
-		renderImage(self.background, 'scenery/').center()
-		renderImage('inventory', 'buttons/', 50, 75).midleft()
-		Screen.button(self)
-
-		if self.speaker:
-			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
-		if self.oddity:
-			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
-		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
-		renderImage('inventory', 'buttons/', 50, 75).midleft()
-		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
-		displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
-		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
-		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivemidleft()
-		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivemidleft()
-		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivemidleft()
-
-		while not self.game_quit:
-			for event in pygame.event.get():
-				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
-						quit()
-				if event.type == pygame.QUIT:
-					pygame.quit()
-					quit()
-			Button(self.button_pos_x, self.button_pos_y, buttons[0], self.next_scene[0]).aScene()
-			Button(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.next_scene[1]).aScene()
-			Button(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.next_scene[2]).aScene()
-			Screen.button(self)
-			pygame.display.update()
-			clock.tick(60)
-
 	def main_menu(self):
 
 		gameDisplay.fill(self.color)
@@ -1768,7 +1730,7 @@ def game_quit():
 
 def main():
 
-	activeScene('Start').game_start()
+	activeScene('Start').execute()
 	pygame.quit()
 	quit()
 
