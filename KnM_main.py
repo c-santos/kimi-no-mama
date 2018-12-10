@@ -826,6 +826,7 @@ class Screen:
 		self.item_pos_x = 80
 		self.item_pos_y = 95
 		self.item_offset = 70
+		self.menu_panel_y = 30
 		self.speaker_font = 'RobotoMono-Italic'
 		self.dialog_box = 'dialog_panel'
 
@@ -845,9 +846,8 @@ class Screen:
 
 	def menu_buttons(self):
 
-		Button(551, 240, 'load-save', save_func, 'buttons/', 189, 48).simple()
-		#Button(551, 280, 'load', save_func, 'buttons/', 189, 48).simple()
-		Button(551, 320, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
+		Button(551, self.menu_panel_y + 115, 'load-save', save_func, 'buttons/', 189, 48).simple()
+		Button(551, self.menu_panel_y + 195, 'menu_quit', game_quit, 'buttons/', 189, 48).simple()
 
 	def save_buttons(self):
 		Button(self.item_pos_x, self.item_pos_y, buttons[1], item_use).simple()
@@ -969,7 +969,7 @@ class activeScene(Screen):
 		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 		displayText('What do you want to do?', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
-		renderImage('menu_panel', '', 0, 125).midtop()
+		renderImage('menu_panel', '', 0, self.menu_panel_y).midtop()
 		while not self.game_quit:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
