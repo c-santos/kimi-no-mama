@@ -191,27 +191,27 @@ class Button:
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
-		#Rect = pygame.Rect
-		buttonRect = pygame.draw.rect(gameDisplay, transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
+		buttonRect = renderImage(self.image, self.image_type, self.pos_x, self.pos_y).load().get_rect()
+		buttonRect.topleft = (self.pos_x, self.pos_y)
+		#buttonRect = pygame.draw.rect(gameDisplay, transparent, [self.pos_x, self.pos_y, self.button_width, self.button_height])
 
 		if buttonRect.collidepoint(mouse_position):
-			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).center()
+			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
 			if left_click and self.action:
 				renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
 				string_to_callable(scene_types.get(self.action))(self.action).execute()
 
 		else:
-			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).center()
+			renderImage(self.image, self.image_type, self.pos_x, self.pos_y).coordinates()
 
 	def simple(self):
 
 		mouse_position = pygame.mouse.get_pos()
 		left_click = pygame.mouse.get_pressed()[0]
-		#Rect = pygame.Rect(self.pos_x, self.pos_y, self.button_width, self.button_height)
+
 		buttonRect = renderImage(self.image, self.image_type, self.pos_x, self.pos_y).load().get_rect()
 		buttonRect.midleft = (self.pos_x, self.pos_y)
-		#buttonRect = pygame.draw.rect(gameDisplay, gray, Rect)
-		#pygame.gfxdraw.box(gameDisplay, pygame.Rect(self.pos_x, self.pos_y , self.button_width , self.button_height), transparent)
+
 		if buttonRect.collidepoint(mouse_position):
 			renderImage('hover' + self.image, self.image_type, self.pos_x, self.pos_y).midleft()
 			if left_click and self.action:
@@ -243,8 +243,8 @@ class Screen:
 		self.dialog_box = 'panel'
 
 	def button(self):
-		Button(1205, 50, 'menu', passiveScene('Scene5').execute, 'buttons/', 50, 50).simple()
-		Button(1010, 50, 'items', activeScene('dScene3').execute, 'buttons/', 175, 50).simple()
+		Button(1205, 50, 'menu', passiveScene('Scene4').execute, 'buttons/', 50, 50).simple()
+		Button(1010, 50, 'items', activeScene('dScene4').popup, 'buttons/', 175, 50).simple()
 
 class passiveScene(Screen):
 
@@ -318,7 +318,37 @@ class activeScene(Screen):
 	def execute(self):
 
 		gameDisplay.fill(self.color)
+		renderImage(self.background, 'scenery/').center()
 		Screen.button(self)
+		if self.speaker:
+			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
+		if self.oddity:
+			renderImage(self.oddity, 'character/', 0, self.char_pos_y).midtop()
+		renderImage(self.dialog_box, '', 0, self.panel_pos_y).midtop()
+		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
+		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivemidleft()
+		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivemidleft()
+		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivemidleft()
+		while not self.game_quit:
+			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						pygame.quit()
+						quit()
+				if event.type == pygame.QUIT:
+					pygame.quit()
+					quit()
+			Button(self.button_pos_x, self.button_pos_y, buttons[0], self.next_scene[0]).aScene()
+			Button(self.button_pos_x, self.button_pos_y + 60, buttons[1], self.next_scene[1]).aScene()
+			Button(self.button_pos_x, self.button_pos_y + 120, buttons[2], self.next_scene[2]).aScene()
+			Screen.button(self)
+			pygame.display.update()
+			clock.tick(60)
+
+	def popup(self):
+
+		gameDisplay.fill(self.color)
 		renderImage(self.background, 'scenery/').center()
 		if self.speaker:
 			renderImage(self.speaker, 'character/', self.char_pos_x, self.char_pos_y).coordinates()
