@@ -953,5 +953,5 @@ choice_texts = {
 	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
 	'dScene28': ('Play DotA', 'Study', 'Let devs choose'),
 
-	'GameOver': ('Back to start', 'Main menu', 'Quit'),
+	'GameOver': ('Back to start', '-', '-'),
 	 }

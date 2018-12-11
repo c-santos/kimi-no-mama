@@ -27,9 +27,6 @@ item_buttons = ('flashdrive_button', 'journal_button', 'levelup1_button', 'level
 buttons = ('button_blue', 'button_green', 'button_orange')
 start_buttons = ('new_game', 'load_game', 'quit')
 
-# COPY PASTE ALL OF THIS TO REPLACE STORY DICTIONARIES
-# 
-
 # A dictionary of scene names and the type of scene
 # There are two scene types as of now, passiveScene and activeScene
 # The capitalization of S is important
@@ -982,8 +979,9 @@ choice_texts = {
 	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
 	'dScene28': ('Play DotA', 'Study', 'Let devs choose'),
 
-	'GameOver': ('Back to start', 'Main menu', 'Quit'),
+	'GameOver': ('Back to start', '-', '-'),
 	 }
+
 # A list of previous the previous scenes, the last element is the latest scene
 previous_scenes = []
 save_checker = []
@@ -1368,7 +1366,7 @@ class activeScene(Screen):
 		renderImage('inventory', 'buttons/', 50, 75).midleft()
 		displayText('devs', 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 		displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
-		displayText('Change your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
+		displayText('Choose your fate Kid', 0, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
 		displayText(self.choices[0], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y).passivemidleft()
 		displayText(self.choices[1], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 60).passivemidleft()
 		displayText(self.choices[2], 0, self.dialog_text_size, self.color, self.button_pos_x + self.button_offset_x, self.button_pos_y + self.button_offset_y + 120).passivemidleft()
@@ -1817,7 +1815,7 @@ def game_quit():
 
 def main():
 
-	activeScene('Scene0').game_start()
+	activeScene('GameOver').execute()()
 	pygame.quit()
 	quit()
 
