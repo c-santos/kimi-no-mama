@@ -1,7 +1,7 @@
 # COPY PASTE ALL OF THIS TO REPLACE STORY DICTIONARIES
 # 
 
-# A dicionary of scene names and the type of scene
+# A dictionary of scene names and the type of scene
 # There are two scene types as of now, passiveScene and activeScene
 # The capitalization of S is important
 # passive is dialog only, while active involves decision
@@ -401,7 +401,7 @@ character = {
 	'Scene36': '',
 	'Scene37': 'doctor',
 
-	'GameOver': '',
+	'GameOver': 'credits',
 	}
 
 # A dictionary of scene names and the dialog to be played

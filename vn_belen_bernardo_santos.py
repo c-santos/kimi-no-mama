@@ -27,10 +27,7 @@ item_buttons = ('flashdrive_button', 'journal_button', 'levelup1_button', 'level
 buttons = ('button_blue', 'button_green', 'button_orange')
 start_buttons = ('new_game', 'load_game', 'quit')
 
-# COPY PASTE ALL OF THIS TO REPLACE STORY DICTIONARIES
-# 
-
-# A dicionary of scene names and the type of scene
+# A dictionary of scene names and the type of scene
 # There are two scene types as of now, passiveScene and activeScene
 # The capitalization of S is important
 # passive is dialog only, while active involves decision
@@ -430,7 +427,7 @@ character = {
 	'Scene36': '',
 	'Scene37': 'doctor',
 
-	'GameOver': '',
+	'GameOver': 'credits',
 	}
 
 # A dictionary of scene names and the dialog to be played
@@ -969,22 +966,21 @@ dialogue = {
 # Key:value format, key is scene name while value is a tuple with 3 elements
 # Tuple's format is (choice1, choice2, choice3) from top to bottom
 choice_texts = {
-	'dScene1': ('Move aggresively', 'Feel surroundings', 'Go apeshit'),
-	'dScene2': ('Yes', 'No', 'Let devs choose'),
-	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'),
-	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'),
-	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'),
-	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', 'Let devs choose'),
-	'dScene14': ('Look', 'Ignore', 'Let devs choose'),
+	'dScene1': ('Move aggresively', 'Feel surroundings', 'Go apeshit'), # A
+	'dScene2': ('Yes', 'No', 'Let devs choose'), # A
+	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'), # B
+	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'), # A
+	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'), # B
+	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', 'Let devs choose'), # A
+	'dScene14': ('Look', 'Ignore', 'Let devs choose'), # 
 	'dScene15': ('Flash drive', 'White brick', 'Soup'),
 	'dScene15.1.1': ('Check flash drive', 'Sleep', 'Let devs choose'),
 	'dScene15.2.1': ('Check white brick', 'Sleep', 'Let devs choose'),
 	'dScene27': ('Put in your bag', 'Bring home', 'Let devs choose'),
 	'dScene28': ('Play DotA', 'Study', 'Let devs choose'),
 
-	'GameOver': ('Play again', '-', '-'),
+	'GameOver': ('Back to start', 'Main menu', 'Quit'),
 	 }
-
 # A list of previous the previous scenes, the last element is the latest scene
 previous_scenes = []
 save_checker = []
@@ -1730,7 +1726,7 @@ def game_quit():
 
 def main():
 
-	activeScene('Start').execute()
+	activeScene('GameOver').execute()
 	pygame.quit()
 	quit()
 
