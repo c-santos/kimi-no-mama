@@ -1429,266 +1429,356 @@ class activeScene(Screen):
 			pygame.display.update()
 			clock.tick(60)
 
+savedata = os.listdir('savedata/')
+savedibs = []
+previoussave = []
+
 class Load:
 	def loadslot1(self):
-		rabble = os.path.join("savedata/", savedata[0])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[0]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot2(self):
-		rabble = os.path.join("savedata/", savedata[1])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[1]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot3(self):
-		rabble = os.path.join("savedata/", savedata[2])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[2]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot4(self):
-		rabble = os.path.join("savedata/", savedata[3])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[3]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot5(self):
-		rabble = os.path.join("savedata/", savedata[4])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[4]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot6(self):
-		rabble = os.path.join("savedata/", savedata[5])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[5]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot7(self):
-		rabble = os.path.join("savedata/", savedata[6])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[6]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
+
 	def loadslot8(self):
-		rabble = os.path.join("savedata/", savedata[7])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[7]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot9(self):
-		rabble = os.path.join("savedata/", savedata[8])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[8]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
 
 	def loadslot10(self):
-		rabble = os.path.join("savedata/", savedata[9])
-		scene_name = pickle.load(open(rabble, "rb"))
+		rabble = savedata[9]
+		rabble1 = os.path.join("savedata/",rabble)
+		scene_name = pickle.load(open(rabble1, "rb"))
 		string_to_callable(scene_types.get(scene_name))(scene_name).execute()
+
 
 class Save:
 	def saveslot1(self):
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + '.txt')
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 1 in save_checker:
+		if not 1 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, 'wb'))
-			previous_save_1.append(save_data_path)
-			save_checker.append(1)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(1)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_1[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, 'wb'))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot2(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 2 in save_checker:
+		if not 2 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_2.append(save_data_path)
-			save_checker.append(2)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(2)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_2[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot3(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 3 in save_checker:
+		if not 3 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_3.append(save_data_path)
-			save_checker.append(3)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(3)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_3[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot4(self):
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 4 in save_checker:
+		if not 4 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_4.append(save_data_path)
-			save_checker.append(4)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(4)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_4[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot5(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 5 in save_checker:
+		if not 5 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_5.append(save_data_path)
-			save_checker.append(5)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(5)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_5[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot6(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 6 in save_checker:
+		if not 6 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_6.append(save_data_path)
-			save_checker.append(6)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(6)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_6[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot7(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 7 in save_checker:
+		if not 7 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_7.append(save_data_path)
-			save_checker.append(7)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(7)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_7[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 
 	def saveslot8(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 8 in save_checker:
+		if not 8 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_8.append(save_data_path)
-			save_checker.append(8)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(8)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_8[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot9(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 9 in save_checker:
+		if not 9 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_9.append(save_data_path)
-			save_checker.append(9)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(9)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_9[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
 
 	def saveslot10(self):
-
-		current_time = datetime.datetime.now().isoformat()
-		save_data_path = os.path.join('savedata/', str(truetime(current_time)) + ".txt")
-		i = -1
-		current_scene = previous_scenes[i]
+		now = datetime.datetime.now()
+		nowfile = now.isoformat()
+		spaces = ''
+		current_scene = ''
+		truetitle = str(truetime(nowfile)) + ".txt"
+		truestitle = os.path.join('savedata/', truetitle)
 		pygame.time.delay(200)
-		if not 10 in save_checker:
+		if not 10 in savedibs:
+			i = -1
+			current_scene = previous_scenes[i]
 			while current_scene == '':
 				i -= 1
 				current_scene = previous_scenes[i] 
-			pickle.dump(current_scene, open(save_data_path, "wb"))
-			previous_save_10.append(save_data_path)
-			save_checker.append(10)
+			pickle.dump(current_scene, open(truestitle, "wb"))
+			previoussave.append(truestitle)
+			savedibs.append(10)
+			print(savedibs)
+			pygame.time.delay(2)
 		else:
 			try:
-				os.remove(previous_save_10[-1])
+				a = previoussave[-1]
+				os.remove(a)
 			except OSError:
 				pass
-			pickle.dump(current_scene, open(save_data_path, "wb"))
+			pickle.dump(current_scene, open(truestitle, "wb"))	
+			print("done")
+
+
 
 class oddScene(Screen):
 
