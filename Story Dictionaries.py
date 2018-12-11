@@ -942,7 +942,7 @@ dialogue = {
 choice_texts = {
 	'dScene1': ('Move aggresively', 'Feel surroundings', 'Go apeshit'), # A
 	'dScene2': ('Yes', 'No', 'Let devs choose'), # A
-	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'), # B
+	'dScene6': ('Cry', 'Puke', 'Shit'), # B
 	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'), # A
 	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'), # B
 	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', 'Let devs choose'), # A

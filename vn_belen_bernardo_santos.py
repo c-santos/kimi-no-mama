@@ -27,6 +27,9 @@ item_buttons = ('flashdrive_button', 'journal_button', 'levelup1_button', 'level
 buttons = ('button_blue', 'button_green', 'button_orange')
 start_buttons = ('new_game', 'load_game', 'quit')
 
+# COPY PASTE ALL OF THIS TO REPLACE STORY DICTIONARIES
+# 
+
 # A dictionary of scene names and the type of scene
 # There are two scene types as of now, passiveScene and activeScene
 # The capitalization of S is important
@@ -968,7 +971,7 @@ dialogue = {
 choice_texts = {
 	'dScene1': ('Move aggresively', 'Feel surroundings', 'Go apeshit'), # A
 	'dScene2': ('Yes', 'No', 'Let devs choose'), # A
-	'dScene6': ('Cry Scene', 'Puke Scene', 'Shit Scene'), # B
+	'dScene6': ('Cry', 'Puke', 'Shit'), # B
 	'dScene9': ('Go back to sleep', 'Get breakfast', 'Play some Fortnite'), # A
 	'dScene10': ('Eat everything', 'Leave and go to school', 'Be honest'), # B
 	'dScene11': ('Go to Rooftop', 'Go to Cafeteria', 'Let devs choose'), # A
@@ -1267,8 +1270,6 @@ class passiveScene(Screen):
 				displayText(self.speaker_name, 0, self.speaker_text_size, self.color_speaker, self.char_name_pos_x, self.char_name_pos_y, self.speaker_font).passivecenter()
 				displayText('ITEMS', 0, self.speaker_text_size, self.color_speaker, 133, 40, self.speaker_font).passivecenter()
 				displayText(self.text_list, self.line, self.dialog_text_size, self.color, self.text_pos_x, 0).active_panel()
-				pygame.mixer.music.load('pop.mp3')
-				pygame.mixer.music.play(-1)
 				self.scene_done = True
 				continue
 			else:
@@ -1726,7 +1727,7 @@ def game_quit():
 
 def main():
 
-	activeScene('GameOver').execute()
+	activeScene('Scene0').game_start()
 	pygame.quit()
 	quit()
 
